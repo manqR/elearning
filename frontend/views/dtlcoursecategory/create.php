@@ -5,9 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Dtlcoursecategory */
 
-$this->title = 'Create Dtlcoursecategory';
-$this->params['breadcrumbs'][] = ['label' => 'Dtlcoursecategories', 'url' => ['index']];
+$this->title = 'Course Detail Category';
+$this->params['breadcrumbs'][] = ['label' => 'Courses', 'url' => ['//course/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Courses Detail', 'url' => ['//dtlcourse/index','id'=>$_GET['id']]];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="dtlcoursecategory-create">
 

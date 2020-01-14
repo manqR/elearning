@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\CourseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Courses';
+$this->title = 'Course';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="course-index">
@@ -15,7 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Course', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add Course', ['create'], ['class' => 'btn btn-success']) ?>
+    
+        <?= Html::a('Add Course Category', ['//coursecategory/create'], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,12 +27,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'courseID',
-            'categoryID',
+            
+            [
+                'label'=>'Category',
+                'attribute'=>'categoryName',
+                'value'=>'category.categoryName'
+            ],  
             'title',
             'description:ntext',
-            'img',
+            [
+                'label'=>'Action',
+                'format' => 'raw',
+                'value'=>function ($model) {
+                    return Html::a('<i class="glyphicon glyphicon-eye-open"></i>',['//dtlcourse/index','id'=>$model->courseID]);
+                },
+            ],
+            // 'img',
             //'materi',
             //'author',
             //'create_date',

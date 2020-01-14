@@ -14,11 +14,14 @@ class CourseSearch extends Course
     /**
      * {@inheritdoc}
      */
+    public $categoryName;
+    // public $nama_departement;
+
     public function rules()
     {
         return [
-            [['courseID', 'categoryID'], 'integer'],
-            [['title', 'description', 'img', 'materi', 'author', 'create_date'], 'safe'],
+            [['courseID'], 'integer'],
+            [['title','categoryName', 'description', 'img', 'materi', 'author', 'create_date'], 'safe'],
         ];
     }
 
@@ -41,6 +44,7 @@ class CourseSearch extends Course
     public function search($params)
     {
         $query = Course::find();
+        $query->joinWith(['category']);
 
         // add conditions that should always apply here
 
@@ -48,24 +52,26 @@ class CourseSearch extends Course
             'query' => $query,
         ]);
 
-        $this->load($params);
+        $dataProvider->sort->attributes['categoryName']=[ 
+			'asc'=>['coursecategory.categoryName' => SORT_ASC],
+			'desc'=>['coursecategory.categoryName'=> SORT_DESC],
+        ];
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+
+        if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'courseID' => $this->courseID,
-            'categoryID' => $this->categoryID,
+            'courseID' => $this->courseID,            
             'create_date' => $this->create_date,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'img', $this->img])
+            ->andFilterWhere(['like', 'coursecategory.categoryName', $this->categoryName])
             ->andFilterWhere(['like', 'materi', $this->materi])
             ->andFilterWhere(['like', 'author', $this->author]);
 

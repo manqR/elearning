@@ -9,6 +9,13 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use frontend\models\RolePrivillage;   
+use frontend\models\Role;
+use frontend\models\Menu;
+
+$role = Role::find()
+    ->where(['idrole'=>Yii::$app->user->identity->roleID])
+    ->One();
 
 AppAsset::register($this);
 ?>
@@ -35,15 +42,40 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
+    $menuItems = array();
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+
+        $model = Menu::find()
+            ->where(['flag'=>1])
+            ->all();
+
+        $x = 0; 
+        $output = [];       
+        foreach($model as $models):
+            $x += 1;
+            $privileges = RolePrivillage::find()
+                ->where(['like', 'menu_name', $models->nama_menu])
+                ->AndWhere(['description'=>'HEAD'])
+                ->AndWhere(['idrole'=>Yii::$app->user->identity->roleID])
+                ->One();
+            
+            if($privileges){
+                if($privileges->flag == 1){                    
+                    $menuItems[] = array(
+                        'label' => $models->nama_menu,
+                        'url'=> '?r='.$models->link,
+                        'active' => $this->context->route == $models->link,
+                        
+                    );
+                    
+                }
+            }
+
+        endforeach;     
+     
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
