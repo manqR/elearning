@@ -13,9 +13,12 @@ use frontend\models\RolePrivillage;
 use frontend\models\Role;
 use frontend\models\Menu;
 
-$role = Role::find()
+if (!Yii::$app->user->isGuest) {
+    $role = Role::find()
     ->where(['idrole'=>Yii::$app->user->identity->roleID])
     ->One();
+}
+
 
 AppAsset::register($this);
 ?>
