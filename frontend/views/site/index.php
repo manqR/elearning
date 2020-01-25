@@ -116,7 +116,7 @@ $this->title = 'My Yii Application';
                                                         <label for="checkbox2"></label>
                                                     </div>
 
-                                                    <img src="assets/images/users/avatar-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
+                                                    <img src="../../assets/images/users/avatar-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
                                                 </td>
 
                                                 <td>
@@ -144,7 +144,7 @@ $this->title = 'My Yii Application';
                                                         <label for="checkbox1"></label>
                                                     </div>
 
-                                                    <img src="assets/images/users/avatar-1.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
+                                                    <img src="../../assets/images/users/avatar-1.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
                                                 </td>
 
                                                 <td>
@@ -172,7 +172,7 @@ $this->title = 'My Yii Application';
                                                         <label for="checkbox3"></label>
                                                     </div>
 
-                                                    <img src="assets/images/users/avatar-3.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
+                                                    <img src="../../assets/images/users/avatar-3.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
                                                 </td>
 
                                                 <td>
@@ -199,7 +199,7 @@ $this->title = 'My Yii Application';
                                                         <label for="checkbox4"></label>
                                                     </div>
 
-                                                    <img src="assets/images/users/avatar-4.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
+                                                    <img src="../../assets/images/users/avatar-4.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
                                                 </td>
 
                                                 <td>
@@ -227,7 +227,7 @@ $this->title = 'My Yii Application';
                                                         <label for="checkbox5"></label>
                                                     </div>
 
-                                                    <img src="assets/images/users/avatar-5.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
+                                                    <img src="../../assets/images/users/avatar-5.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
                                                 </td>
 
                                                 <td>
@@ -255,7 +255,7 @@ $this->title = 'My Yii Application';
                                                         <label for="checkbox6"></label>
                                                     </div>
 
-                                                    <img src="assets/images/users/avatar-6.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
+                                                    <img src="../../assets/images/users/avatar-6.jpg" alt="contact-img" title="contact-img" class="rounded-circle thumb-sm" />
                                                 </td>
 
                                                 <td>

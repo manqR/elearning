@@ -9,9 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
-use frontend\models\RolePrivillage;   
-use frontend\models\Role;
-use frontend\models\Menu;
+
 
 if (!Yii::$app->user->isGuest) {
     $role = Role::find()

@@ -1,6 +1,14 @@
 <?php
+    use yii\helpers\Html;
 
+
+    $this->registerCss("
+        .ti-power-off{
+            cursor:pointer;
+        }
+    ");
 ?>
+
 
  <!-- Top Bar Start -->
  <div class="topbar">
@@ -9,10 +17,10 @@
     <div class="topbar-left">
         <a href="index.html" class="logo">
             <span>
-                <img src="assets/images/logo.png" alt="">
+                <img src="../../assets/images/logo.png" alt="">
             </span>
             <i>
-                <img src="assets/images/logo_sm.png" alt="">
+                <img src="../../assets/images/logo_sm.png" alt="">
             </i>
         </a>
     </div>
@@ -20,93 +28,12 @@
     <nav class="navbar-custom">
 
         <ul class="list-unstyled topbar-right-menu float-right mb-0">
-            <li class="dropdown notification-list hide-phone">
-                <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
-                aria-haspopup="false" aria-expanded="false">
-                    <i class="mdi mdi-earth"></i> English  <i class="mdi mdi-chevron-down"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        Spanish
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        Italian
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        French
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        Russian
-                    </a>
-
-                </div>
-            </li>
-
-            <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" href="#" role="button"
-                aria-haspopup="false" aria-expanded="false">
-                    <i class="mdi mdi-bell noti-icon"></i>
-                    <span class="badge badge-danger badge-pill noti-icon-badge">4</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h6 class="m-0"><span class="float-right"><a href="" class="text-dark"><small>Clear All</small></a> </span>Notification</h6>
-                    </div>
-
-                    <div class="slimscroll" style="max-height: 190px;">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-success"><i class="mdi mdi-comment-account-outline"></i></div>
-                            <p class="notify-details">Caleb Flakelar commented on Admin<small class="text-muted">1 min ago</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-info"><i class="mdi mdi-account-plus"></i></div>
-                            <p class="notify-details">New user registered.<small class="text-muted">5 hours ago</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-danger"><i class="mdi mdi-heart"></i></div>
-                            <p class="notify-details">Carlos Crouch liked <b>Admin</b><small class="text-muted">3 days ago</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-warning"><i class="mdi mdi-comment-account-outline"></i></div>
-                            <p class="notify-details">Caleb Flakelar commented on Admin<small class="text-muted">4 days ago</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-custom"><i class="mdi mdi-heart"></i></div>
-                            <p class="notify-details">Carlos Crouch liked <b>Admin</b><small class="text-muted">13 days ago</small></p>
-                        </a>
-                    </div>
-
-                    <!-- All-->
-                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                        View all <i class="fi-arrow-right"></i>
-                    </a>
-
-                </div>
-            </li>
+          
 
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                 aria-haspopup="false" aria-expanded="false">
-                    <img src="assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle"> <span class="ml-1">Anderson <i class="mdi mdi-chevron-down"></i> </span>
+                    <img src="../../assets/images/users/avatar-1.jpg" alt="user" class="rounded-circle"> <span class="ml-1">Anderson <i class="mdi mdi-chevron-down"></i> </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
@@ -123,16 +50,16 @@
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="ti-settings"></i> <span>Settings</span>
                     </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="ti-lock"></i> <span>Lock Screen</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="ti-power-off"></i> <span>Logout</span>
-                    </a>
+                  
+                   
+                    <?=				  
+                        Html::beginForm(['/site/logout'], 'post')
+                        . Html::submitButton(
+                            '<span style="margin-left: 10px;">Logout</span>',
+                            ['class' => 'dropdown-item notify-item ti-power-off']
+                        )
+                        . Html::endForm()
+                    ?>
 
                 </div>
             </li>

@@ -14,7 +14,7 @@ use Yii;
  * @property string $link
  * @property int $flag
  */
-class Menu extends \yii\db\ActiveRecord
+class Menus extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
