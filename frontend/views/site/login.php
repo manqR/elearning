@@ -10,32 +10,25 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="m-t-40 card-box">
+    <div class="text-center">
+        <h2 class="text-uppercase m-t-0 m-b-30">
+            <a href="index.html" class="text-success">
+                <span><img src="../../assets/images/logo.png" alt="" height="30"></span>
+            </a>
+        </h2>
+        <!--<h4 class="text-uppercase font-bold m-b-0">Sign In</h4>-->
+    </div>
+    <div class="account-content">
+        <?php $form = ActiveForm::begin(['id' => 'login-form','class'=>'form-horizontal']); ?>
 
-    <p>Please fill out the following fields to login:</p>
+            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'password')->passwordInput() ?>                
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+            <div class="form-group">
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            </div>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-                    <br>
-                    Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
-                </div>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
-        </div>
+        <?php ActiveForm::end(); ?>        
     </div>
 </div>
