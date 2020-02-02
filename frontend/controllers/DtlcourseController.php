@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Dtlcourse;
+use frontend\models\Dtlcourseopt;
 use frontend\models\DtlcourseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -62,12 +63,36 @@ class DtlcourseController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new Dtlcourse();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->iddetailcourse]);
+        if ($model->load(Yii::$app->request->post())){
+            
+            $model->courseID = $id;
+            $model->save(false);            
+
+            $isCorrect = 0;
+           for($i = 1 ; $i <= 5; $i++){
+                $options = new Dtlcourseopt();
+                $options->iddtlcourse = $model->iddetailcourse;
+                $options->courseID = $id;
+                $options->optID = $i;
+                $options->optional = $_POST['options'.$i];
+                $options->iscorrect = isset($_POST['answer'.$i]) ? 1 : 0;
+                $options->save();                         
+                
+                if(isset($_POST['answer'.$i]) ? 1 : 0 == 1){
+                    $isCorrect = $i;
+                }
+           }           
+           $lookUp = DtlCourse::findOne(['iddetailcourse'=>$model->iddetailcourse]);
+           $lookUp->correctAnswer = $isCorrect;
+           $lookUp->save(false);
+           if($lookUp){
+                Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Course Added !');
+                return $this->redirect(['index','id'=>$id]);
+            }               
         }
 
         return $this->render('create', [
@@ -85,13 +110,44 @@ class DtlcourseController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $options = Dtlcourseopt::findAll(['iddtlcourse'=>$id]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        if ($model->load(Yii::$app->request->post())){
+            
+            $model->save();
+            $isCorrect = 0;
+            foreach($options as $option):
+                $option->delete();
+            endforeach;
+
+            for($i = 1 ; $i <= 5; $i++){
+                 $options = new Dtlcourseopt();
+                 $options->iddtlcourse = $model->iddetailcourse;
+                 $options->courseID = $model->courseID;
+                 $options->optID = $i;
+                 $options->optional = $_POST['options'.$i];
+                 $options->iscorrect = isset($_POST['answer'.$i]) ? 1 : 0;
+                 $options->save(false);                         
+                 
+                 if(isset($_POST['answer'.$i]) ? 1 : 0 == 1){
+                     $isCorrect = $i;
+                 }
+            }           
+            $lookUp = DtlCourse::findOne(['iddetailcourse'=>$model->iddetailcourse]);
+            $lookUp->correctAnswer = $isCorrect;
+            $lookUp->save(false);
+            if($lookUp){
+                 Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Course Added !');
+                 return $this->redirect(['index','id'=>$model->courseID]);
+             }       
+
             return $this->redirect(['view', 'id' => $model->iddetailcourse]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'options' =>$options
         ]);
     }
 
@@ -104,9 +160,11 @@ class DtlcourseController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = Dtlcourse::findOne(['iddetailcourse'=>$id]);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Course Deleted !');        
+        return $this->redirect(['index','id'=>$model->courseID]);
     }
 
     /**

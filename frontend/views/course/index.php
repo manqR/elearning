@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Action',
                 'format' => 'raw',
                 'value'=>function ($model) {
-                    return Html::a('<i class="glyphicon glyphicon-eye-open"></i>',['//dtlcourse/index','id'=>$model->courseID]);
+                    return Html::a('<i class="mdi mdi-eye"></i>',['//dtlcourse/index','id'=>$model->courseID]);
                 },
             ],
             // 'img',

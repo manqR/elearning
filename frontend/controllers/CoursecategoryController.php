@@ -67,7 +67,8 @@ class CoursecategoryController extends Controller
         $model = new Coursecategory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->categoryID]);
+            Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Course Category Added !');
+            return $this->redirect(['//course/index']);
         }
 
         return $this->render('create', [

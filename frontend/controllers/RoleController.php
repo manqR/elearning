@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * RoleController implements the CRUD actions for Role model.
  */
+include '../../asset/inc/auth.php';
 class RoleController extends Controller
 {
     /**
@@ -33,8 +34,18 @@ class RoleController extends Controller
      * Lists all Role models.
      * @return mixed
      */
+
+    public function beforeAction($action){
+                
+        if(!getAuth()){
+           return true; 
+        }                
+    }
     public function actionIndex()
     {
+        // include '../../asset/inc/auth.php';
+        // getAuth();
+
         $searchModel = new RoleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -66,8 +77,13 @@ class RoleController extends Controller
     {
         $model = new Role();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idrole]);
+        if ($model->load(Yii::$app->request->post())){
+            
+            $model->save();
+            if($model){
+                Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Role Add !');
+                return $this->redirect(['index']);
+            }              
         }
 
         return $this->render('create', [
@@ -86,8 +102,13 @@ class RoleController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idrole]);
+        if ($model->load(Yii::$app->request->post())){
+            
+            $model->save();
+            if($model){
+                Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Role Update !');
+                return $this->redirect(['index']);
+            }                
         }
 
         return $this->render('update', [
@@ -116,6 +137,12 @@ class RoleController extends Controller
      * @return Role the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    public function actionMenu(){
+      
+        return $this->render('menu');
+       
+    }
     protected function findModel($id)
     {
         if (($model = Role::findOne($id)) !== null) {

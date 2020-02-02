@@ -43,6 +43,8 @@ class Course extends \yii\db\ActiveRecord
             [['create_date'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['img', 'materi', 'author'], 'string', 'max' => 50],
+            [['img'], 'file', 'extensions' => 'gif, jpg, png, jpeg'],
+            [['materi'], 'file', 'extensions' => 'pdf'],
             [['categoryID'], 'exist', 'skipOnError' => true, 'targetClass' => Coursecategory::className(), 'targetAttribute' => ['categoryID' => 'categoryID']],
         ];
     }

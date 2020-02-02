@@ -38,7 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],  
             'title',
             'description:ntext',
-            'correctAnswer',
+            [
+                'label'=>'CorrectAnswer',
+                'attribute'=>'correctAnswerAlias',
+                'value'=>'correctAnswer0.alias'
+            ],              
             'poin',
             //'hint:ntext',
 

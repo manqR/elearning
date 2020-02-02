@@ -57,9 +57,10 @@ if (Yii::$app->controller->action->id === 'login'){
                 <div class="content-page">                  
                     <div class="content">
                         <div class="container-fluid">
-                            <?= Breadcrumbs::widget([
-                                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                            ]) ?>
+                            <?= // Breadcrumbs::widget([
+                                //'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                               '' // ])
+                            ?>
                             <?= Alert::widget() ?>
                             <?= $content ?>
                         </div>

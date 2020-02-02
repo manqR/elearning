@@ -14,6 +14,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\Coursecategory;
 
 /**
  * Site controller
@@ -78,9 +79,11 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
-    {
-        return $this->render('index');
+    public function actionIndex(){
+        $model = Coursecategory::findAll(['flag'=>1]);        
+        return $this->render('index',[
+            'model'=>$model
+        ]);
     }
 
     /**

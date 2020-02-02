@@ -12,28 +12,36 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [        
-        '../../assets/plugins/morris/morris.css',
-        '../../assets/css/bootstrap.min.css',
-        '../../assets/css/icons.css',
-        '../../assets/css/slick.min.css',
-        '../../assets/css/slick-theme.min.css',
-        '../../assets/css/metismenu.min.css',
-        '../../assets/css/style.css',
-        '../../assets/js/modernizr.min.js',
+        '../../asset/plugins/morris/morris.css',
+        '../../asset/datatables/media/css/dataTables.bootstrap4.css',   
+        '../../asset/css/bootstrap.min.css',
+        '../../asset/css/icons.css',
+        '../../asset/css/slick.min.css',
+        '../../asset/css/slick-theme.min.css',
+        '../../asset/css/metismenu.min.css',
+        '../../asset/plugins/sweet-alert2/sweetalert2.min.css',
+        '../../asset/css/style.css',
+        '../../asset/plugins/summernote/summernote-bs4.css',        
+        
         
     ];
     public $js = [
-        '../../assets/js/jquery.min.js',
-        '../../assets/js/popper.min.js',
-        '../../assets/js/slick.min.js',
-        '../../assets/js/bootstrap.min.js',
-        '../../assets/js/metisMenu.min.js',
-        '../../assets/js/waves.js',
-        '../../assets/js/jquery.slimscroll.js',
-        '../../assets/plugins/morris/morris.min.js',
-        '../../assets/pages/jquery.dashboard.js',
-        '../../assets/js/jquery.core.js',
-        '../../assets/js/jquery.app.js',
+        
+        '../../asset/js/popper.min.js',
+        '../../asset/js/modernizr.min.js',
+        '../../asset/js/slick.min.js',
+        '../../asset/datatables/media/js/jquery.dataTables.js',
+        '../../asset/js/bootstrap.min.js',
+        '../../asset/plugins/sweet-alert2/sweetalert2.min.js',
+        '../../asset/js/metisMenu.min.js',
+        '../../asset/js/waves.js',
+        '../../asset/js/jquery.slimscroll.js',
+        '../../asset/plugins/morris/morris.min.js',
+        '../../asset/pages/jquery.dashboard.js',
+        '../../asset/js/jquery.core.js',
+        '../../asset/js/jquery.app.js',
+        '../../asset/inc/apiTable.js',
+        '../../asset/plugins/summernote/summernote-bs4.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

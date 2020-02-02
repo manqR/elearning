@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\Menu;
+use frontend\models\Menus;
 use frontend\models\MenuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -64,7 +64,7 @@ class MenuController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Menu();
+        $model = new Menus();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idmenu]);

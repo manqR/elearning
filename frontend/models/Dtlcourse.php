@@ -85,7 +85,7 @@ class Dtlcourse extends \yii\db\ActiveRecord
      */
     public function getCorrectAnswer0()
     {
-        return $this->hasOne(Dtlcourseopt::className(), ['urutan' => 'correctAnswer']);
+        return $this->hasOne(Tbloption::className(), ['id' => 'correctAnswer']);
     }
 
     /**

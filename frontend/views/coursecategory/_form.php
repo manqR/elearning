@@ -13,8 +13,9 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'categoryName')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'flag')->dropDownList(['1' => 'Enable', '0' => 'Disable'],['style'=>'height:40px'])->label('Status'); ?>
 
-    <?= $form->field($model, 'flag')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

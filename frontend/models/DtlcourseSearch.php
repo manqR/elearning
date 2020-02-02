@@ -15,11 +15,12 @@ class DtlcourseSearch extends Dtlcourse
      * {@inheritdoc}
      */
     public $categoryName;
+    public $correctAnswerAlias;
     public function rules()
     {
         return [
             [['iddetailcourse', 'courseID', 'correctAnswer', 'poin'], 'integer'],
-            [['title', 'categoryName','description', 'hint'], 'safe'],
+            [['title','correctAnswerAlias', 'categoryName','description', 'hint'], 'safe'],
         ];
     }
 
@@ -41,10 +42,12 @@ class DtlcourseSearch extends Dtlcourse
      */
     public function search($params)
     {
-
         $query = Dtlcourse::find();
         $query->joinWith(['detail']);
-        $query->where(['courseID'=>$params['id']]);
+        $query->joinWith(['correctAnswer0']);
+        $query->where(['Dtlcourse.courseID'=>$params['id']]);
+        (isset($params['DtlcourseSearch']['detailID']) ? $query->Andwhere(['Dtlcourse.detailID'=>$params['DtlcourseSearch']['detailID']]) : '');
+        
 
         // add conditions that should always apply here
 
@@ -56,6 +59,11 @@ class DtlcourseSearch extends Dtlcourse
         $dataProvider->sort->attributes['categoryName']=[ 
 			'asc'=>['dtlcoursecategory.dtlCatCourseName' => SORT_ASC],
 			'desc'=>['dtlcoursecategory.dtlCatCourseName'=> SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['correctAnswerAlias']=[ 
+			'asc'=>['tbloption.alias' => SORT_ASC],
+			'desc'=>['tbloption.alias'=> SORT_DESC],
         ];
 
         $this->load($params);
@@ -77,6 +85,7 @@ class DtlcourseSearch extends Dtlcourse
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'category.dtlCatCourseName', $this->categoryName])
+            ->andFilterWhere(['like', 'CorrectAnswer0.alias', $this->correctAnswerAlias])
             ->andFilterWhere(['like', 'hint', $this->hint]);
 
         return $dataProvider;

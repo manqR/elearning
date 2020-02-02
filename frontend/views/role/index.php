@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Role', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Role Menu', ['menu'], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,11 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'idrole',
+            ['class' => 'yii\grid\SerialColumn'],            
             'role_name',
-            'status',
+            [
+                'label'=>'Status',                
+                'format' => 'raw',
+                'value'=>function ($model) {
+                    return ($model->status == 1 ? '<span class="label label-success">Enabled</span>' : '<span class="label label-danger">Disabled</span>');
+                },
+            ],            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

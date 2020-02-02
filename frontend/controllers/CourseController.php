@@ -7,6 +7,7 @@ use frontend\models\Course;
 use frontend\models\CourseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 
 /**
@@ -66,8 +67,25 @@ class CourseController extends Controller
     {
         $model = new Course();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->courseID]);
+        if ($model->load(Yii::$app->request->post())){
+            $model->img = UploadedFile::getInstance($model, 'img');
+            $model->materi = UploadedFile::getInstance($model, 'materi');
+            if ($model->img || $model->materi){
+                
+
+                $model->img->saveAs('../../asset/images/course/' .sha1($model->img). '.' . $model->img->extension);
+                $model->img =  sha1($model->img). '.' . $model->img->extension; 
+
+                $model->materi->saveAs('../../asset/materi/' .sha1($model->materi). '.' . $model->materi->extension);
+                $model->materi = sha1($model->materi). '.' . $model->materi->extension; 
+                
+                $model->create_date = date('Y-m-d H:i:s');
+                $model->save();
+                if($model){
+                    Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Course Added !');
+                    return $this->redirect(['index']);
+                }  
+            }          
         }
 
         return $this->render('create', [
@@ -85,9 +103,32 @@ class CourseController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
+        if ($model->load(Yii::$app->request->post())){
+            $model->materi = UploadedFile::getInstance($model, 'materi');
+            $model->img = UploadedFile::getInstance($model, 'img');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->courseID]);
+            if (isset($model->img)){                                
+                $model->img->saveAs('../../asset/images/course/' .sha1($model->img). '.' . $model->img->extension);
+                $model->img =  sha1($model->img). '.' . $model->img->extension;                                
+            }   
+            
+            if(isset($model->materi)){
+                $model->materi->saveAs('../../asset/materi/' .sha1($model->materi). '.' . $model->materi->extension);
+                $model->materi = sha1($model->materi). '.' . $model->materi->extension; 
+                
+            }
+            $model->create_date = date('Y-m-d H:i:s');
+            $model->save();
+            if($model){
+                Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Course Added !');
+                return $this->redirect(['index']);
+            }  
+
+        //     var_dump($model->materi);
+        // die;
+            // $model->save();
+            // return $this->redirect(['view', 'id' => $model->courseID]);
         }
 
         return $this->render('update', [

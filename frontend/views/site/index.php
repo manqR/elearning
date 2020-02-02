@@ -1,5 +1,5 @@
 <?php
-
+use frontend\models\Course;
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -11,15 +11,14 @@ $this->registerCss("
     display:block;
     margin:0 auto;
   }
-  h3 {
-      background: #000;
-      color: #3498db;
-      font-size: 36px;
-      line-height: 200px;
+  h3 {      
+      color: #FFF;
+      font-size: 24px;      
       margin: 10px;
       padding: 2%;
       position: relative;
       text-align: center;
+      border-radius:5px;
   }
   .action{
     display:block;
@@ -56,31 +55,13 @@ $('.slider-nav').slick({
 ");
 ?>
 
-<div class="row">
-    <div class="col-sm-12">
-        <h4 class="header-title m-t-0 m-b-20">Personal Developmet</h4>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card-box widget-inline">
-            <div class="main">
-                <div class="slider slider-nav">
-                    <div><h3>1</h3></div>
-                    <div><h3>2</h3></div>
-                    <div><h3>3</h3></div>
-                    <div><h3>4</h3></div>
-                    <div><h3>5</h3></div>
-                </div>               
-            </div>
-        </div>
-    </div>
-</div>
-                   
+<?php
+    foreach($model as $models):
+?>
 
 <div class="row">
     <div class="col-sm-12">
-        <h4 class="header-title m-t-0 m-b-20">Marketing</h4>
+        <h4 class="header-title m-t-0 m-b-20"><?= $models->categoryName ?></h4>
     </div>
 </div>
 <div class="row">
@@ -88,14 +69,17 @@ $('.slider-nav').slick({
         <div class="card-box widget-inline">
             <div class="main">
                 <div class="slider slider-nav">
-                    <div><h3>1</h3></div>
-                    <div><h3>2</h3></div>
-                    <div><h3>3</h3></div>
-                    <div><h3>4</h3></div>
-                    <div><h3>5</h3></div>
+                    <?php
+                        $course = Course::findAll(['categoryID'=>$models->categoryID]);
+                        foreach($course as $courses):
+                    ?>
+                      <div><h3 style="background-image: url('../../asset/images/course/<?= $courses->img ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3><span style="word-break: break-all;font-size:20px"><?= $courses->title ?></span></div>
+                    <?php endforeach; ?>                    
                 </div>               
             </div>
         </div>
     </div>
 </div>
+<?php endforeach; ?>                   
+
                    

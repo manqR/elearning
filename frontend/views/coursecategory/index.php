@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\CoursecategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Coursecategories';
+$this->title = 'Course Category';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="coursecategory-index">

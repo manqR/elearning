@@ -13,8 +13,10 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'role_name')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'status')-> dropDownList(['1'=>'Enabled',2=>'Disabled'],
+			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px'])  ?>		
 
-    <?= $form->field($model, 'status')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
