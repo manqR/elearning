@@ -51,9 +51,9 @@ class CourseController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionDetail($id)
     {
-        return $this->render('view', [
+        return $this->render('detail', [
             'model' => $this->findModel($id),
         ]);
     }

@@ -69,7 +69,7 @@ $(document).ready(function() {
 </div>
 <hr/>
 <div class="dtlcourse-form">
-    <div class="col-md-12">
+    <div class="col-md-12" style="display:flex">
         <div class="col-md-6 col-xs-6">
         <?php $form = ActiveForm::begin(); ?>            
 
