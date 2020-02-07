@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * TbloptionController implements the CRUD actions for Tbloption model.
  */
+include '../../asset/inc/auth.php';
 class TbloptionController extends Controller
 {
     /**
@@ -33,6 +34,12 @@ class TbloptionController extends Controller
      * Lists all Tbloption models.
      * @return mixed
      */
+    public function beforeAction($action){
+                
+        if(!getAuth()){
+           return true; 
+        }                
+    }
     public function actionIndex()
     {
         $searchModel = new TbloptionSearch();

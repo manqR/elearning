@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * DtlcoursecategoryController implements the CRUD actions for Dtlcoursecategory model.
  */
+include '../../asset/inc/auth.php';
 class DtlcoursecategoryController extends Controller
 {
     /**
@@ -33,6 +34,12 @@ class DtlcoursecategoryController extends Controller
      * Lists all Dtlcoursecategory models.
      * @return mixed
      */
+    public function beforeAction($action){
+                
+        if(!getAuth()){
+           return true; 
+        }                
+    }
     public function actionIndex()
     {
         $searchModel = new DtlcoursecategorySearch();

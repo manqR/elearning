@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * CoursecategoryController implements the CRUD actions for Coursecategory model.
  */
+include '../../asset/inc/auth.php';
 class CoursecategoryController extends Controller
 {
     /**
@@ -33,6 +34,13 @@ class CoursecategoryController extends Controller
      * Lists all Coursecategory models.
      * @return mixed
      */
+
+    public function beforeAction($action){
+                
+        if(!getAuth()){
+           return true; 
+        }                
+    }
     public function actionIndex()
     {
         $searchModel = new CoursecategorySearch();

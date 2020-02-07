@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * MenuController implements the CRUD actions for Menu model.
  */
+include '../../asset/inc/auth.php';
 class MenuController extends Controller
 {
     /**
@@ -33,6 +34,12 @@ class MenuController extends Controller
      * Lists all Menu models.
      * @return mixed
      */
+    public function beforeAction($action){
+                
+        if(!getAuth()){
+           return true; 
+        }                
+    }
     public function actionIndex()
     {
         $searchModel = new MenuSearch();

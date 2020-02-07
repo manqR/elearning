@@ -95,7 +95,7 @@ $('.slider-nav').slick({
 
                           
                     ?>
-                      <a href="?r=course/detail&id=<?= $courses->courseID ?>">
+                      <a href="?r=site/detail&id=<?= $courses->courseID ?>">
                       <div>
                         <h3 style="background-image: url('../../asset/images/course/<?= $courses->img ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3>
                         <div class="textBox">

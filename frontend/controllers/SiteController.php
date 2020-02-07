@@ -15,6 +15,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\Coursecategory;
+use frontend\models\Course;
+use frontend\models\CourseSearch;
 
 /**
  * Site controller
@@ -38,7 +40,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','detail'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -79,6 +81,7 @@ class SiteController extends Controller
      *
      * @return mixed
      */
+   
     public function actionIndex(){
         $model = Coursecategory::findAll(['flag'=>1]);        
         return $this->render('index',[
@@ -86,6 +89,12 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionDetail($id)
+    {
+        return $this->render('detail', [
+            'model' => $this->findModel($id),
+        ]);
+    }
     /**
      * Logs in a user.
      *
@@ -265,5 +274,13 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+    protected function findModel($id)
+    {
+        if (($model = Course::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
