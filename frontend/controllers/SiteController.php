@@ -40,7 +40,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index','detail'],
+                        'actions' => ['logout', 'index','detail','materi'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -88,7 +88,13 @@ class SiteController extends Controller
             'model'=>$model
         ]);
     }
-
+    public function actionMateri($id){
+        $model = $this->findModel($id);
+        $completePath = '../../asset/materi/'.$model->materi;
+        // var_dump($model->materi);
+        // die;
+        return Yii::$app->response->sendFile($completePath, $model->materi, ['inline'=>true]);
+    }
     public function actionDetail($id)
     {
         return $this->render('detail', [
