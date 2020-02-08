@@ -45,8 +45,8 @@ class DtlcourseSearch extends Dtlcourse
         $query = Dtlcourse::find();
         $query->joinWith(['detail']);
         $query->joinWith(['correctAnswer0']);
-        $query->where(['Dtlcourse.courseID'=>$params['id']]);
-        (isset($params['DtlcourseSearch']['detailID']) ? $query->Andwhere(['Dtlcourse.detailID'=>$params['DtlcourseSearch']['detailID']]) : '');
+        $query->where(['dtlcourse.courseID'=>$params['id']]);
+        (isset($params['DtlcourseSearch']['detailID']) ? $query->Andwhere(['dtlcourse.detailID'=>$params['DtlcourseSearch']['detailID']]) : '');
         
 
         // add conditions that should always apply here
