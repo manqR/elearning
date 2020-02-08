@@ -47,6 +47,19 @@ $this->registerCss("
     width: 280px;
     padding-right:13px;
   }
+   @media screen and (max-width: 600px) {
+     .box{
+       margin-right:260px;
+     }
+     .slick-track{
+      display: flex;
+    }
+     
+ 
+   }
+  
+  
+ }
 ");
 
 $this->registerJs("
@@ -63,6 +76,8 @@ $('.slider-nav').slick({
     var slideno = $(this).data('slide');
     $('.slider-nav').slick('slickGoTo', slideno - 1);
   });
+
+  $('.box').removeStyle('width');
 ");
 ?>
 
@@ -79,7 +94,7 @@ $('.slider-nav').slick({
     <div class="col-sm-12">
         <div class="card-box widget-inline">
             <div class="main">
-                <div class="slider slider-nav">
+                <div class="slider slider-nav" style="width:100%">
                     <?php
                         $course = Course::findAll(['categoryID'=>$models->categoryID]);
                         foreach($course as $courses):
@@ -95,7 +110,7 @@ $('.slider-nav').slick({
 
                           
                     ?>
-                      <a href="?r=site/detail&id=<?= $courses->courseID ?>">
+                      <a  class="box" href="?r=site/detail&id=<?= $courses->courseID ?>">
                       <div>
                         <h3 style="background-image: url('../../asset/images/course/<?= $courses->img ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3>
                         <div class="textBox">
