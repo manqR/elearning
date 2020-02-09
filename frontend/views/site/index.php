@@ -104,10 +104,19 @@ $('.slider-nav').slick({
                                                              FROM dtlcourse a 
                                                              JOIN dtlcoursecategory b ON a.detailID = b.detailID 
                                                              WHERE a.courseID = '".$courses->courseID."'
-                                                             GROUP BY a.courseID, b.dtlCatCourseName");
+                                                             GROUP BY b.dtlCatCourseName");
                                                         
-                          $mode = $sql->queryOne();  
-
+                          $mode = $sql->queryAll();  
+                          
+                         $practice = 0;
+                         $quiz = 0;
+                         foreach($mode as $modes):
+                          if($modes['catName'] ==  "Practice"){
+                           $practice = $modes['jml'];
+                          }                          
+                          $quiz =  (isset($modes['jml']) && $modes['catName'] == "Quiz" ? $modes['jml'] : "0");
+                         endforeach;
+                   
                           
                     ?>
                       <a  class="box" href="?r=site/detail&id=<?= $courses->courseID ?>">
@@ -115,8 +124,8 @@ $('.slider-nav').slick({
                         <h3 style="background-image: url('../../asset/images/course/<?= $courses->img ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3>
                         <div class="textBox">
                           <span style="word-break: break-all;font-size:15px;display:block"><?= $courses->title ?></span>
-                           <span class="ti-tag" style="font-size: 11px; font-weight: bold;float: right; margin-top: 5px; "><?= (isset($mode['jml']) && $mode['catName'] == "Quiz" ? $mode['jml']. " Quiz" : "0 Quiz") ?></span>
-                           <span class="ti-medall" style="font-size: 11px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?= (isset($mode['jml']) && $mode['catName'] == "Practice" ? $mode['jml']. " Practice" : "0 Practice") ?></span>
+                           <span class="ti-tag" style="font-size: 11px; font-weight: bold;float: right; margin-top: 5px; "><?= $practice. " Practice" ?></span>
+                           <span class="ti-medall" style="font-size: 11px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?= $quiz ." Quiz"?></span>
                         </div>
                       </div>
                       </a>

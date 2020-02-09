@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use frontend\models\Role;
+use frontend\models\RolePrivillage;
 use frontend\models\RoleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -35,17 +36,15 @@ class RoleController extends Controller
      * @return mixed
      */
 
-    public function beforeAction($action){
-                
+    public function beforeAction($action){                
         if(!getAuth()){
            return true; 
-        }                
+        }   
     }
-    public function actionIndex()
-    {
-        // include '../../asset/inc/auth.php';
-        // getAuth();
+    
 
+    public function actionIndex()
+    {       
         $searchModel = new RoleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

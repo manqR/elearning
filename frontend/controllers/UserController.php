@@ -12,6 +12,8 @@ use common\models\User;
 /**
  * UserController implements the CRUD actions for User model.
  */
+
+include '../../asset/inc/auth.php';
 class UserController extends Controller
 {
     /**
@@ -33,6 +35,13 @@ class UserController extends Controller
      * Lists all User models.
      * @return mixed
      */
+
+    public function beforeAction($action){                
+        if(!getAuth()){
+           return true; 
+        }   
+    }
+    
     public function actionIndex()
     {
         $searchModel = new UserSearch();

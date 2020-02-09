@@ -10,7 +10,9 @@ use Yii;
  * @property int $id
  * @property int $urutan
  * @property int $answer
+ * @property int $iddetailcourse
  *
+ * @property Dtlcourse $iddetailcourse0
  * @property Dtlcourseopt $answer0
  * @property Usercourse $urutan0
  */
@@ -30,8 +32,9 @@ class Resultcourse extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['urutan', 'answer'], 'required'],
-            [['urutan', 'answer'], 'integer'],
+            [['urutan', 'answer', 'iddetailcourse'], 'required'],
+            [['urutan', 'answer', 'iddetailcourse'], 'integer'],
+            [['iddetailcourse'], 'exist', 'skipOnError' => true, 'targetClass' => Dtlcourse::className(), 'targetAttribute' => ['iddetailcourse' => 'iddetailcourse']],
             [['answer'], 'exist', 'skipOnError' => true, 'targetClass' => Dtlcourseopt::className(), 'targetAttribute' => ['answer' => 'urutan']],
             [['urutan'], 'exist', 'skipOnError' => true, 'targetClass' => Usercourse::className(), 'targetAttribute' => ['urutan' => 'urutan']],
         ];
@@ -46,7 +49,16 @@ class Resultcourse extends \yii\db\ActiveRecord
             'id' => 'ID',
             'urutan' => 'Urutan',
             'answer' => 'Answer',
+            'iddetailcourse' => 'Iddetailcourse',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIddetailcourse0()
+    {
+        return $this->hasOne(Dtlcourse::className(), ['iddetailcourse' => 'iddetailcourse']);
     }
 
     /**

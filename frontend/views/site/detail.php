@@ -13,13 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $this->registerCss("
 @media screen and (min-width: 600px) {
-    img{
+    .cover{
         max-width:70%
     }
     
 }
 @media screen and (max-width: 600px) {
-    img{
+    .cover{
         max-width:100%
     }
     h1{
@@ -35,7 +35,17 @@ $sql = $connection->createCommand("SELECT COUNT(*) jml, b.dtlCatCourseName catNa
                                    WHERE a.courseID = '".$model->courseID."'
                                    GROUP BY a.courseID, b.dtlCatCourseName");
                               
-$mode = $sql->queryOne();  
+$mode = $sql->queryAll();  
+
+
+$practice = 0;
+$quiz = 0;
+foreach($mode as $modes):
+ if($modes['catName'] ==  "Practice"){
+  $practice = $modes['jml'];
+ }                          
+ $quiz =  (isset($modes['jml']) && $modes['catName'] == "Quiz" ? $modes['jml'] : "0");
+endforeach;
 
 ?>
 <div class="course-view">
@@ -43,15 +53,15 @@ $mode = $sql->queryOne();
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="card card-block" style="border: none;border: none;align-items: center;margin: 40px;">        
-        <img src="../../asset/images/course/<?= $model->img ?>" />
+        <img class="cover" src="../../asset/images/course/<?= $model->img ?>" />
     </div>              
     
     <div class="card card-block"  style="margin: 10px 10px 10px 0px;border: none">
         <span ><?= $model->description ?>  </span>
     </div>
-    <span class="ti-tag" style="font-size: 13px; font-weight: bold;float: right; margin-top: 5px; "><?= (isset($mode['jml']) && $mode['catName'] == "Quiz" ? $mode['jml']. " Quiz" : "0 Quiz") ?></span>
-    <span class="ti-medall" style="font-size: 13px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?= (isset($mode['jml']) && $mode['catName'] == "Practice" ? $mode['jml']. " Practice" : "0 Practice") ?></span>
-    <button class="btn btn-success">Practice</button>
-    <button class="btn btn-warning">Quiz</button>
+    <span class="ti-tag" style="font-size: 13px; font-weight: bold;float: right; margin-top: 5px; "><?= $quiz ."Quiz" ?></span>
+    <span class="ti-medall" style="font-size: 13px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?=  $practice ."Practice" ?></span>
+    <?= Html::a('<span class="btn btn-success">Practice</span>',['//mycourse/practice','courseID'=>$model->courseID,'userID'=>Yii::$app->user->identity->id])?>
+    <?= Html::a('<span class="btn btn-warning">Quiz</span>',['//mycourse/quiz','courseID'=>$model->courseID,'userID'=>Yii::$app->user->identity->id])?>
     <?= Html::a('<span class="btn btn-primary">Materi</span>',['materi','id'=>$model->courseID])?>
 </div>

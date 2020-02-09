@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use frontend\models\Role;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\UserSearch */
@@ -28,8 +29,21 @@ $this->params['breadcrumbs'][] = $this->title;
             
             'username',
             'name',
-            'roleID',                        
-            'status',
+            [
+                'label'=>'Role',                
+                'format' => 'raw',
+                'value'=>function ($model) {
+                    $role = Role::findOne(['idrole'=>$model->roleID]);
+                    return $role->role_name;
+                },
+            ],                                          
+            [
+                'label'=>'Status',                
+                'format' => 'raw',
+                'value'=>function ($model) {
+                    return ($model->status == 10 ? '<span class="label label-success">Enabled</span>' : '<span class="label label-danger">Disabled</span>');
+                },
+            ],      
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
