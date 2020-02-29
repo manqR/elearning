@@ -13,6 +13,7 @@ use Yii;
  * @property string $color
  * @property string $link
  * @property int $flag
+ * @property string $alias
  */
 class Menus extends \yii\db\ActiveRecord
 {
@@ -30,9 +31,10 @@ class Menus extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_menu', 'icon', 'color', 'link', 'flag'], 'required'],
+            [['nama_menu', 'icon', 'color', 'link', 'flag', 'alias'], 'required'],
             [['flag'], 'integer'],
             [['nama_menu', 'icon', 'color', 'link'], 'string', 'max' => 50],
+            [['alias'], 'string', 'max' => 25],
         ];
     }
 
@@ -48,6 +50,7 @@ class Menus extends \yii\db\ActiveRecord
             'color' => 'Color',
             'link' => 'Link',
             'flag' => 'Flag',
+            'alias' => 'Alias',
         ];
     }
 }

@@ -42,7 +42,7 @@
                     
                     $x += 1;
                     $privileges = RolePrivillage::find()
-                        ->where(['like', 'menu_name', $models->nama_menu])
+                        ->where(['like', 'menu_name', $models->alias])
                         ->AndWhere(['description'=>'HEAD'])
                         ->AndWhere(['idrole'=>Yii::$app->user->identity->roleID])
                         ->One();
