@@ -34,7 +34,7 @@
                     'label' => '<li class="menu-title">Navigation</li>',                                                            
                 );  
                 $output[] = array(
-                    'label' => '<i class="ti-home"></i><span>Dashboard</span>',
+                    'label' => '<i class="ti-home"></i><span>Beranda</span>',
                     'url'=> Yii::$app->HomeUrl,                    
                     
                 );  
