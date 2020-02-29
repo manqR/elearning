@@ -167,7 +167,7 @@ class ApiController extends Controller{
                 $privilege = new RolePrivillage();
                 $privilege->idrole = $_POST['role'];
                 $privilege->description = 'HEAD';
-                $privilege->menu_name = $models->nama_menu;
+                $privilege->menu_name = $models->alias;
                 $privilege->flag = $head[$i];
                 $privilege->save();
                 // echo $i;
