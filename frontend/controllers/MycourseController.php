@@ -30,7 +30,7 @@ class MycourseController extends \yii\web\Controller
             'model'=>$model
         ]);
     }
-    public function actionQuiz($courseID, $userID, $dtl = 1){
+    public function actionQuiz($courseID, $userID, $dtl = 1, $r=0, $type){
         if($userID == Yii::$app->user->identity->id){        
             $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$dtl]);          
             $model = Dtlcourse::find()                    
@@ -38,9 +38,21 @@ class MycourseController extends \yii\web\Controller
                     ->AndWhere(['detailID'=>$dtl])
                     ->orderBy(['iddetailcourse'=>SORT_ASC])
                     ->One();
-            if($model){
+            if($model){                
                 $no = 1;
-                if($lastCourse){
+                if($lastCourse && $lastCourse->isFinish == 1){                                       
+                    $delDetail = Resultcourse::findAll(['urutan'=>$lastCourse->urutan]);
+                    foreach($delDetail as $delDetails):
+                        // var_dump($delDetails);
+                        $delDetails->delete();
+                    endforeach;
+                    $lastCourse->delete();                    
+                    // die;
+                    $r = 1;
+                }
+                $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$dtl]);          
+                if($lastCourse){                    
+                   
                     $last =  Resultcourse::find()
                             ->where(['urutan'=>$lastCourse->urutan])
                             ->orderBy(['id'=>SORT_DESC])
@@ -55,9 +67,15 @@ class MycourseController extends \yii\web\Controller
                             ->AndWhere(['courseID'=>$courseID])
                             ->AndWhere(['detailID'=>$dtl])
                             ->One();
-                    if(!$model){
-                        Yii::$app->session->setFlash('success', '<strong>Finished !</strong> Course is Finished !');
-                        return $this->redirect(['index','courseid'=>$courseID,'usr'=>$userID]);
+                    if(!$model){                          
+                        $lastCourse->isFinish = 1;
+                        $lastCourse->endDate = date('Y-m-d H:i:s');                     
+                        $lastCourse->save();
+                        if($r==0){
+                            Yii::$app->session->setFlash('success', '<strong>Finished !</strong> Course is Finished !');
+                            return $this->redirect(['index','courseid'=>$courseID,'usr'=>$userID]);
+                        }
+                        
                     }
                 }            
                 $course = Course::findOne(['courseID'=>$courseID]);
@@ -81,7 +99,7 @@ class MycourseController extends \yii\web\Controller
         throw new NotFoundHttpException('The requested page does not exist.');
        
     }
-    public function actionPractice($courseID, $userID,$dtl = 2){
+    public function actionPractice($courseID, $userID,$dtl = 2,$r=0,$type){
         if($userID == Yii::$app->user->identity->id){  
           
             $course = Course::findOne(['courseID'=>$courseID]);
@@ -94,6 +112,16 @@ class MycourseController extends \yii\web\Controller
                     ->One();
             if($model){
                 $no = 1;
+                if($lastCourse && $lastCourse->isFinish == 1){                                       
+                    $delDetail = Resultcourse::findAll(['urutan'=>$lastCourse->urutan]);
+                    foreach($delDetail as $delDetails):
+                        // var_dump($delDetails);
+                        $delDetails->delete();
+                    endforeach;
+                    $lastCourse->delete();                                        
+                    $r = 1;
+                }
+                $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$dtl]);
                 if($lastCourse){
                     $last =  Resultcourse::find()
                             ->where(['urutan'=>$lastCourse->urutan])
@@ -110,8 +138,13 @@ class MycourseController extends \yii\web\Controller
                             ->AndWhere(['detailID'=>$dtl])
                             ->One();
                     if(!$model){
-                        Yii::$app->session->setFlash('success', '<strong>Finished !</strong> Course is Finished !');
-                        return $this->redirect(['index','courseid'=>$courseID,'usr'=>$userID]);
+                        $lastCourse->isFinish = 1;
+                        $lastCourse->endDate = date('Y-m-d H:i:s');                     
+                        $lastCourse->save();
+                        if($r==0){
+                            Yii::$app->session->setFlash('success', '<strong>Finished !</strong> Course is Finished !');
+                            return $this->redirect(['index','courseid'=>$courseID,'usr'=>$userID]);
+                        }
                     }
                 }          
                 $option = Dtlcourseopt::find()
@@ -135,7 +168,7 @@ class MycourseController extends \yii\web\Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
     public function actionCheckAnswer(){
-        if($_POST){            
+        if($_POST){                        
             $findAnswer = Dtlcourse::findOne(['courseID'=>$_POST['courseID'],'iddetailcourse'=>$_POST['iddetailcourse'],'detailID'=>$_POST['dtl']]);
             $correct= 0;
             $output = array();
@@ -153,8 +186,9 @@ class MycourseController extends \yii\web\Controller
             
             $model = Usercourse::findOne(['userID'=>Yii::$app->user->identity->id, 'courseID'=>$_POST['courseID'],'detailID'=>$_POST['dtl']]);
             if($model){
-                $lastScore = ($model->score / 100) * $sum;                
-                $model->score = (($lastScore + $poin) / $sum ) * 100;                
+                
+                $lastScore = ($_POST['type'] == 1 ? 0: ($model->score / 100) * $sum);                
+                $model->score = ($_POST['type'] == 1 ? 0: (($lastScore + $poin) / $sum ) * 100);                
                 $model->endDate = date('Y-m-d H:i:s');
                 $model->save(false);
             }else{
@@ -193,7 +227,7 @@ class MycourseController extends \yii\web\Controller
 
             $output = array(
                 'answer'=>($correct == 1 ? 'correct': ''),
-                'correctAnswer'=>$opt->alias,
+                'correctAnswer'=>($_POST['type'] == 1 ? 'A' :$opt->alias),
                 'isFinish'=>$isFinish
              );
           

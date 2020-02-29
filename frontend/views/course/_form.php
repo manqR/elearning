@@ -26,13 +26,13 @@ $(document).ready(function() {
     <?php $form = ActiveForm::begin(); ?>
     
    		
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true])->label('Judul') ?>
 
     <?= $form->field($model, 'categoryID')-> dropDownList(
 			ArrayHelper::map(Coursecategory::find()->all(),'categoryID','categoryName'),
-			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px'])->label('Course Category');  ?>		
+			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px'])->label('Mata Kuliah');  ?>		
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6,'class'=>'summernote']) ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6,'class'=>'summernote'])->label('Deskripsi') ?>
 
     <?= $form->field($model, 'img')->fileInput(['class'=>'form-control'])->label('Image Covered') ?>
 

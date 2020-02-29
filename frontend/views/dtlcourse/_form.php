@@ -90,15 +90,18 @@ $(document).ready(function() {
                         for($i = 1;$i <= 5; $i++){                            
                             $cheked = '';
                             $val = '';
-                            if(!$model->isNewRecord){                            
-                                if($options[$i-1]['iscorrect'] == 1){
-                                    $cheked = 'checked';
+                            if(!$model->isNewRecord){ 
+                                if(isset($options[$i-1])){
+                                    if($options[$i-1]['iscorrect'] == 1){
+                                        $cheked = 'checked';
                                 }
+                                }                           
+                               
                                 $val = isset($options[$i-1]['optional']) ? 'value ='.$options[$i-1]['optional'] : '';
                             }
                            echo' <tr>   
                                 <td><input type="radio" '.$cheked.' name="answer'.$i.'" ></td>               
-                                <td><input type="text" '.$val.' name="options'.$i.'" placeholder="Enter your Option" class="form-control name_list" required="" /></td>                                  
+                                <td><input type="text" '.$val.' name="options'.$i.'" placeholder="Enter your Option" class="form-control name_list" /></td>                                  
                             </tr>' ; 
                         }
                     ?>                   

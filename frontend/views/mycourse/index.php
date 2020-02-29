@@ -2,6 +2,8 @@
 /* @var $this yii\web\View */
 use yii\helpers\Html;
 use frontend\models\Course;
+use frontend\models\Tbloption;
+use frontend\models\ResultCourse;
 
 
 $this->registerCss("
@@ -21,7 +23,7 @@ $this->registerCss("
   }
 ");
 ?>
-<h1>My Course</h1>
+<h1>Riwayat Modul</h1>
 
 <?php
     foreach($model as $models):
@@ -39,5 +41,24 @@ $this->registerCss("
     <div class="card card-block"  style="margin: 10px 10px 10px 0px;border: none">
         <span ><?= $course->description ?>  </span>
     </div>
+    <?php
+        if($models->score >= 80){
+            $showResult = Resultcourse::find()
+                        ->joinWith('iddetailcourse0')
+                        ->where(['courseID'=>$course->courseID])
+                        ->Andwhere(['detailID'=>1])       
+                        ->orderBy(['iddetailcourse'=>SORT_ASC])                 
+                        ->all();  
+                      
+            foreach($showResult as $i => $showResults):
+                if($showResults->answer == $showResults->iddetailcourse0->correctAnswer){
+                    $i = $i +1;
+                    $optList = Tbloption::findOne(['id'=>$showResults->answer]);
+                    echo "<li class='btn btn-success'> Pertanyaan Nomor ". $i .". Jawaban Benar ".$optList->alias."</li>";
+                }                
+            endforeach;
+            // die;
+        }
+    ?>
 </div>
     <?php endforeach; ?>

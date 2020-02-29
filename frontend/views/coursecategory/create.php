@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Coursecategory */
 
-$this->title = 'Add Category';
+$this->title = 'Tambah Matakuliah';
 $this->params['breadcrumbs'][] = ['label' => 'Coursecategories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

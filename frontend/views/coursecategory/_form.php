@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'categoryName')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'categoryName')->textInput(['maxlength' => true])->label('Nama Matakuliah') ?>
     
     <?= $form->field($model, 'flag')->dropDownList(['1' => 'Enable', '0' => 'Disable'],['style'=>'height:40px'])->label('Status'); ?>
 

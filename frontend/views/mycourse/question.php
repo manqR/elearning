@@ -48,41 +48,55 @@ $this->registerCss("
 
 $this->registerJs("
     function answer(){
-        var answerRadio = document.querySelector(\"input[name=answers]:checked\");
-        if (document.querySelectorAll('input[type=\"radio\"]:checked').length === 0){
-            console.log('tidak ada dipilih')            
-            $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-alert\"> Please select the correct answer !</i>' );
-        }else{            
-            $('span.msg-err').html('').append('' );
-            
+        if(".$_GET['type']." == 1){
             $.post('./?r=mycourse/check-answer',{
-                optID: answerRadio.value,
+                optID: 1,
+                type:1,
                 courseID:".$course->courseID.",
                 iddetailcourse:".$model->iddetailcourse.",
                 dtl:".$dtl."
             },
-            function(data, status){	                 
-                if(status == 'success'){
-                    if(data[0]['answer'] == 'correct'){                        
-                        $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-success alert-dismissible fade show mdi mdi-check-all\"> Congratulation ! , Your answers is Corected !</i>' );
-                    }else{                        
-                        $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-block-helper\"> Sorry ! , Your answers Incorrected ! <b>The Correct answer is '+data[0]['correctAnswer']+'</b></i>' );
-                    }  
-                   
-                    $('#submit').css('display','none');               
-                    $('#next').css('display','block');     
-                    $('#finish').css('display','none');    
+            function(data, status){	 
+                location.reload();
+            })
+        }else{
+            var answerRadio = document.querySelector(\"input[name=answers]:checked\");
+            if (document.querySelectorAll('input[type=\"radio\"]:checked').length === 0){
+                console.log('tidak ada dipilih')            
+                $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-alert\"> Please select the correct answer !</i>' );
+            }else{            
+                $('span.msg-err').html('').append('' );
+                
+                $.post('./?r=mycourse/check-answer',{
+                    optID: answerRadio.value,
+                    type:".$_GET['type'].",
+                    courseID:".$course->courseID.",
+                    iddetailcourse:".$model->iddetailcourse.",
+                    dtl:".$dtl."
+                },
+                function(data, status){	                 
+                    if(status == 'success'){
+                        if(data[0]['answer'] == 'correct'){                        
+                            $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-success alert-dismissible fade show mdi mdi-check-all\"> Congratulation ! , Your answers is Corected !</i>' );
+                        }else{                        
+                            $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-block-helper\"> Sorry ! , Your answers Incorrected ! <b>The Correct answer is '+data[0]['correctAnswer']+'</b></i>' );
+                        }  
+                    
+                        $('#submit').css('display','none');               
+                        $('#next').css('display','block');     
+                        $('#finish').css('display','none');    
 
-                    if(data[0]['isFinish'] == true){
-                        $('#next').css('display','none'); 
-                        $('#finish').css('display','block'); 
-                    }                              
-                    $('input[name=answers]').attr(\"disabled\",true);                            
-                }else{
-                    $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-alert\"> There\'s problem with your connection, please try again !</i>' );
-                }
-                            
-            });
+                        if(data[0]['isFinish'] == true){
+                            $('#next').css('display','none'); 
+                            $('#finish').css('display','block'); 
+                        }                              
+                        $('input[name=answers]').attr(\"disabled\",true);                            
+                    }else{
+                        $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-alert\"> There\'s problem with your connection, please try again !</i>' );
+                    }
+                                
+                });
+            }
         }
     
     }

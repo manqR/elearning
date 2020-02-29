@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\CourseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Course';
+$this->title = 'Manajemen Modul';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="course-index">
@@ -15,9 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Add Course', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Modul', ['create'], ['class' => 'btn btn-success']) ?>
     
-        <?= Html::a('Add Course Category', ['//coursecategory/create'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Tambah Mata kuliah', ['//coursecategory/create'], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

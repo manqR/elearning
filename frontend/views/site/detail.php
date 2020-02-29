@@ -59,9 +59,9 @@ endforeach;
     <div class="card card-block"  style="margin: 10px 10px 10px 0px;border: none">
         <span ><?= $model->description ?>  </span>
     </div>
-    <span class="ti-tag" style="font-size: 13px; font-weight: bold;float: right; margin-top: 5px; "><?= $quiz ."Quiz" ?></span>
-    <span class="ti-medall" style="font-size: 13px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?=  $practice ."Practice" ?></span>
-    <?= Html::a('<span class="btn btn-success">Practice</span>',['//mycourse/practice','courseID'=>$model->courseID,'userID'=>Yii::$app->user->identity->id])?>
-    <?= Html::a('<span class="btn btn-warning">Quiz</span>',['//mycourse/quiz','courseID'=>$model->courseID,'userID'=>Yii::$app->user->identity->id])?>
-    <?= Html::a('<span class="btn btn-primary">Materi</span>',['materi','id'=>$model->courseID])?>
+    <span class="ti-tag" style="font-size: 13px; font-weight: bold;float: right; margin-top: 5px; "><?= $quiz ."Tes" ?></span>
+    <span class="ti-medall" style="font-size: 13px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?=  $practice ."Latihan" ?></span>
+    <?= Html::a('<span class="btn btn-success">Latihan</span>',['//mycourse/practice','courseID'=>$model->courseID,'userID'=>Yii::$app->user->identity->id,'type'=>1])?>
+    <?= Html::a('<span class="btn btn-warning">Tes Formatif</span>',['//mycourse/quiz','courseID'=>$model->courseID,'userID'=>Yii::$app->user->identity->id,'type'=>2])?>
+    <?= Html::a('<span class="btn btn-primary">Materi</span>',['materi','id'=>$model->courseID],['target'=>'_blank'])?>
 </div>
