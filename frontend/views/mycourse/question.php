@@ -105,7 +105,7 @@ $this->registerJs("
 
 <h1><?=  $this->title ?></h1>
 
-<span class="title btn btn-success">Question <?= $no ?></span>
+<span class="title btn btn-success">Pertanyaan <?= $no ?></span>
 
     
     <?php    
@@ -117,9 +117,9 @@ $this->registerJs("
 
             echo "<div class='question'><span class='questions'>".$no .". ".$model->description."</span>$opt</div>";  
            
-            echo "<button class='answer btn btn-success' id='submit' onClick='answer()'> Submit Answer</button><span class='msg-err'></span>";      
-            echo "<button class='answer btn btn-success' id='next' style='display:none' onClick='location.reload();'> Next &raquo; </button>";      
-            echo "<button class='answer btn btn-success' id='finish' style='display:none' onClick='location.reload();'> View Result &raquo; </button>";      
+            echo "<button class='answer btn btn-success' id='submit' onClick='answer()'> Submit Jawaban</button><span class='msg-err'></span>";      
+            echo "<button class='answer btn btn-success' id='next' style='display:none' onClick='location.reload();'> Lanjut &raquo; </button>";      
+            echo "<button class='answer btn btn-success' id='finish' style='display:none' onClick='location.reload();'> Lihat Hasil &raquo; </button>";      
         if($dtl == 2 ){
     ?>
         <div class="alert alert-icon alert-info alert-dismissible fade show" style="margin-left: 45px;"role="alert">
@@ -128,7 +128,7 @@ $this->registerJs("
                 <span aria-hidden="true">&times;</span>
             </button>
             <i class="mdi mdi-information"></i>
-            <strong>Hints!</strong> <?= $model->hint ?>
+            <strong>Bantuan !</strong> <?= $model->hint ?>
         </div>
     <?php
         }

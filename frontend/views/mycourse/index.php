@@ -32,7 +32,7 @@ $this->registerCss("
 <div class="row" style="border-bottom: 1px solid #a9a9a933;">
        
     <h2><?= Html::encode($course->title) ?><span >
-        <?= Html::a('<span class="btn btn-'.($models->score <= 50 ? 'warning':'success').'" style="font-size: 17px;">Your Score : '.$models->score.'</span>',['//site/detail','id'=>$course->courseID])?></span>
+        <?= Html::a('<span class="btn btn-'.($models->score <= 50 ? 'warning':'success').'" style="font-size: 17px;">Nilai Anda : '.$models->score.'</span>',['//site/detail','id'=>$course->courseID])?></span>
     </h2>    
     <div class="card card-block" style="border: none;border: none;align-items: center;margin: 40px;">        
         <img class="cover" src="../../asset/images/course/<?= $course->img ?>" />        
@@ -49,14 +49,15 @@ $this->registerCss("
                         ->Andwhere(['detailID'=>1])       
                         ->orderBy(['iddetailcourse'=>SORT_ASC])                 
                         ->all();  
-                      
+            echo "<div style='margin:15px;display:block'>";      
             foreach($showResult as $i => $showResults):
                 if($showResults->answer == $showResults->iddetailcourse0->correctAnswer){
                     $i = $i +1;
                     $optList = Tbloption::findOne(['id'=>$showResults->answer]);
-                    echo "<li class='btn btn-success'> Pertanyaan Nomor ". $i .". Jawaban Benar ".$optList->alias."</li>";
+                    echo "<li class='text-success'> Pertanyaan Nomor ". $i .". Jawaban Benar ".$optList->alias."</li>";
                 }                
             endforeach;
+            echo "</div>";
             // die;
         }
     ?>

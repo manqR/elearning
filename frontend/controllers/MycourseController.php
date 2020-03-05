@@ -93,7 +93,7 @@ class MycourseController extends \yii\web\Controller
                     'option' => $option
                 ]);
             }else{
-                throw new BadRequestHttpException('There\'s no question in this course');
+                throw new BadRequestHttpException('Tes Tidak Tersedia di modul ini');
             }
         }
         throw new NotFoundHttpException('The requested page does not exist.');
@@ -162,7 +162,7 @@ class MycourseController extends \yii\web\Controller
                     'option' => $option
                 ]);
             }else{
-                throw new BadRequestHttpException('There\'s no question in this course');
+                throw new BadRequestHttpException('Tes Tidak Tersedia di Modul ini');
             }
         }
         throw new NotFoundHttpException('The requested page does not exist.');
