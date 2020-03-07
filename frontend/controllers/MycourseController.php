@@ -209,7 +209,7 @@ class MycourseController extends \yii\web\Controller
             $modelDtl->urutan = $model->urutan;
             $modelDtl->answer = $_POST['optID'];
             $modelDtl->iddetailcourse = $_POST['iddetailcourse'];
-            $modelDtl->save();
+            $modelDtl->save(false);
 
             $totalQuestion = Dtlcourse::find()
                 ->where(['courseID'=>$_POST['courseID']])                
