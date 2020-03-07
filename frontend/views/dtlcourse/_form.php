@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use frontend\models\Dtlcoursecategory;
+use yii\web\View;
 
 include '../../asset/inc/table.php';
 
@@ -63,6 +64,12 @@ $(document).ready(function() {
 
 ");
 
+$this->registerJs('
+    function checkCat(val){              
+        val == 1 ? $("#pract").css("display", "block") : $("#pract").css("display", "none");
+    }
+',VIEW::POS_HEAD);
+
 ?>
 <div class="mas-claim-view card card-block" style="margin:23px">
     <?= TableCourse($model->isNewRecord ? $_GET['id'] : $model->courseID); ?>
@@ -76,42 +83,43 @@ $(document).ready(function() {
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'detailID')-> dropDownList(
 			ArrayHelper::map(Dtlcoursecategory::find()->all(),'detailID','dtlCatCourseName'),
-			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px'])->label('Course Category Detail');  ?>		
+			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px', 'onChange'=>'checkCat(this.value)'])->label('Course Category Detail');  ?>		
 
             <?= $form->field($model, 'description')->textarea(['rows' => 3,'class'=>'summernote']) ?>
 
                        
         </div>
         <div class="col-md-6 col-xs-6">
-            <h4> Answer </h4>
-             <div class="table-responsive">  
-                <table class="table table-bordered" id="dynamic_field">  
-                    <?php 
-                        for($i = 1;$i <= 5; $i++){                            
-                            $cheked = '';
-                            $val = '';
-                            if(!$model->isNewRecord){ 
-                                if(isset($options[$i-1])){
-                                    if($options[$i-1]['iscorrect'] == 1){
-                                        $cheked = 'checked';
+            <div id="pract">
+                <h4> Answer </h4>
+                <div class="table-responsive">  
+                    <table class="table table-bordered" id="dynamic_field">  
+                        <?php 
+                            for($i = 1;$i <= 5; $i++){                            
+                                $cheked = '';
+                                $val = '';
+                                if(!$model->isNewRecord){ 
+                                    if(isset($options[$i-1])){
+                                        if($options[$i-1]['iscorrect'] == 1){
+                                            $cheked = 'checked';
+                                    }
+                                    }                           
+                                
+                                    $val = isset($options[$i-1]['optional']) ? 'value ='.$options[$i-1]['optional'] : '';
                                 }
-                                }                           
-                               
-                                $val = isset($options[$i-1]['optional']) ? 'value ='.$options[$i-1]['optional'] : '';
+                            echo' <tr>   
+                                    <td><input type="radio" '.$cheked.' name="answer'.$i.'" ></td>               
+                                    <td><input type="text" '.$val.' name="options'.$i.'" placeholder="Enter your Option" class="form-control name_list" /></td>                                  
+                                </tr>' ; 
                             }
-                           echo' <tr>   
-                                <td><input type="radio" '.$cheked.' name="answer'.$i.'" ></td>               
-                                <td><input type="text" '.$val.' name="options'.$i.'" placeholder="Enter your Option" class="form-control name_list" /></td>                                  
-                            </tr>' ; 
-                        }
-                    ?>                   
-                </table>                     
-
+                        ?>                   
+                    </table>                     
                     <?= $form->field($model, 'poin')->textInput() ?>
-                    <?= $form->field($model, 'hint')->textInput() ?> 
-                <div class="form-group">
-                    <?= Html::submitButton('Save', ['class' => 'btn btn-success','id'=>'submit']) ?>
-                </div>                 
+                </div>                            
+            </div>    
+            <?= $form->field($model, 'hint')->textInput() ?> 
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success','id'=>'submit']) ?>
             </div>        
         </div>
     </div>    

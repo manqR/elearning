@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Dtlcoursecategory */
 
-$this->title = 'Course Detail Category';
+$this->title = 'Tambah Kategori Soal';
 $this->params['breadcrumbs'][] = ['label' => 'Courses', 'url' => ['//course/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Courses Detail', 'url' => ['//dtlcourse/index','id'=>$_GET['id']]];
 $this->params['breadcrumbs'][] = $this->title;

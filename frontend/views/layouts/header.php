@@ -35,27 +35,16 @@
                 aria-haspopup="false" aria-expanded="false">
                     <img src="../../asset/images/users/avatar-1.jpg" alt="user" class="rounded-circle"> <span class="ml-1"><?= Yii::$app->user->identity->username; ?> <i class="mdi mdi-chevron-down"></i> </span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h6 class="text-overflow m-0">Welcome !</h6>
-                    </div>
+                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">                            
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="ti-user"></i> <span>My Account</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="ti-settings"></i> <span>Settings</span>
-                    </a>
+                    <?= Html::a('<i class="ti-settings"></i> <span style="font-size:14px">Ganti Password</span>',['//site/change-password'],['class'=>'dropdown-item notify-item'])?>                    
                   
                    
                     <?=				  
                         Html::beginForm(['/site/logout'], 'post')
                         . Html::submitButton(
-                            '<span style="margin-left: 10px;">Logout</span>',
+                            '<span style="margin-left: 10px;">Keluar</span>',
                             ['class' => 'dropdown-item notify-item ti-power-off']
                         )
                         . Html::endForm()

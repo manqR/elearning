@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\models\DtlcourseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Course Detail';
+$this->title = 'Manajemen Soal';
 $this->params['breadcrumbs'][] = ['label' => 'Courses', 'url' => ['//course/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -21,8 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <hr/>
 
     <p>
-        <?= Html::a('Add Course Detail', ['create','id'=>$_GET['id']], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Category Course Detail', ['//dtlcoursecategory/create','id'=>$_GET['id']], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Tambah Soal', ['create','id'=>$_GET['id']], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Kategori Soal', ['//dtlcoursecategory/create','id'=>$_GET['id']], ['class' => 'btn btn-warning']) ?>
     </p>
 
 

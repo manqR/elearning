@@ -5,6 +5,8 @@ use frontend\models\Course;
 use frontend\models\Tbloption;
 use frontend\models\ResultCourse;
 
+$this->title='Riwayat Modul';
+
 
 $this->registerCss("
 @media screen and (min-width: 600px) {
@@ -23,7 +25,7 @@ $this->registerCss("
   }
 ");
 ?>
-<h1>Riwayat Modul</h1>
+<h1><?= $this->title; ?></h1>
 
 <?php
     foreach($model as $models):

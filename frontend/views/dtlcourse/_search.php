@@ -20,7 +20,7 @@ use frontend\models\Dtlcoursecategory;
     
     <?= $form->field($model, 'detailID')-> dropDownList(
 			ArrayHelper::map(Dtlcoursecategory::find()->all(),'detailID','dtlCatCourseName'),
-			['prompt'=>'- Pilih -','style' => 'width: 100%;height: 33px;'])->label('Course Category');  ?>	
+			['prompt'=>'- Pilih -','style' => 'width: 100%;height: 33px;'])->label('Kategori Soal');  ?>	
     <?= Html::hiddenInput('id', $_GET['id']); ?>
     
 

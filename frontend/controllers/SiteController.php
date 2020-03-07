@@ -17,6 +17,7 @@ use frontend\models\ContactForm;
 use frontend\models\Coursecategory;
 use frontend\models\Course;
 use frontend\models\CourseSearch;
+use frontend\models\Users;
 
 /**
  * Site controller
@@ -40,7 +41,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index','detail','materi'],
+                        'actions' => ['logout', 'index','detail','materi','change-password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -232,6 +233,21 @@ class SiteController extends Controller
         }
 
         return $this->render('resetPassword', [
+            'model' => $model,
+        ]);
+    }
+    public function actionChangePassword(){
+       
+        $model = Users::findOne(['id'=>Yii::$app->user->identity->id]);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->password_hash = Yii::$app->security->generatePasswordHash($model->password_hash);
+            $model->save(false);
+            Yii::$app->session->setFlash('success', 'New password saved.');
+            return $this->goHome();
+        }
+
+        return $this->render('changePassword', [
             'model' => $model,
         ]);
     }

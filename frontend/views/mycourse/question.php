@@ -129,6 +129,7 @@ $this->registerJs("
             </button>
             <i class="mdi mdi-information"></i>
             <strong>Bantuan !</strong> <?= $model->hint ?>
+            <?= Html::a('<span class="btn btn-primary">Materi</span>',['//site/materi','id'=>$model->courseID],['target'=>'_blank'])?>
         </div>
     <?php
         }
