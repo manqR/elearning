@@ -100,21 +100,21 @@ $('.slider-nav').slick({
                         foreach($course as $courses):
 
                           $connection = \Yii::$app->db;
-                          $sql = $connection->createCommand("SELECT COUNT(*) jml, b.dtlCatCourseName catName
+                          $sql = $connection->createCommand("SELECT COUNT(*) jml, b.dtlCatCourseName catName, b.detailID
                                                              FROM dtlcourse a 
                                                              JOIN dtlcoursecategory b ON a.detailID = b.detailID 
                                                              WHERE a.courseID = '".$courses->courseID."'
-                                                             GROUP BY b.dtlCatCourseName");
+                                                             GROUP BY b.dtlCatCourseName, b.detailID");
                                                         
                           $mode = $sql->queryAll();  
                           
                          $practice = 0;
                          $quiz = 0;
                          foreach($mode as $modes):
-                          if($modes['catName'] ==  "Practice"){
+                          if($modes['detailID'] ==  "2"){
                            $practice = $modes['jml'];
                           }                          
-                          $quiz =  (isset($modes['jml']) && $modes['catName'] == "Quiz" ? $modes['jml'] : "0");
+                          $quiz =  (isset($modes['jml']) && $modes['detailID'] == "1" ? $modes['jml'] : "0");
                          endforeach;
                    
                           
