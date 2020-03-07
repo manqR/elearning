@@ -124,8 +124,8 @@ $('.slider-nav').slick({
                         <h3 style="background-image: url('../../asset/images/course/<?= $courses->img ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3>
                         <div class="textBox">
                           <span style="word-break: break-all;font-size:15px;display:block"><?= $courses->title ?></span>
-                           <span class="ti-tag" style="font-size: 11px; font-weight: bold;float: right; margin-top: 5px; "><?= $practice. " Practice" ?></span>
-                           <span class="ti-medall" style="font-size: 11px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?= $quiz ." Quiz"?></span>
+                           <span class="ti-tag" style="font-size: 11px; font-weight: bold;float: right; margin-top: 5px; "><?= $practice. " Latihan" ?></span>
+                           <span class="ti-medall" style="font-size: 11px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?= $quiz ." Tes Formatif"?></span>
                         </div>
                       </div>
                       </a>
