@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Tambah Soal', ['create','id'=>$_GET['id']], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Tambah Kategori Soal', ['//dtlcoursecategory/create','id'=>$_GET['id']], ['class' => 'btn btn-warning']) ?>
+        <?= ''//Html::a('Tambah Kategori Soal', ['//dtlcoursecategory/create','id'=>$_GET['id']], ['class' => 'btn btn-warning']) ?>
     </p>
 
 
