@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use frontend\models\Course;
 use frontend\models\Tbloption;
-use frontend\models\ResultCourse;
+use frontend\models\Resultcourse;
 
 $this->title='Riwayat Modul';
 
