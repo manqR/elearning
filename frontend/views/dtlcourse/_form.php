@@ -90,6 +90,9 @@ $this->registerJs('
                        
         </div>
         <div class="col-md-6 col-xs-6">
+            <?php
+                if(!$model->isNewRecord && $model->detailID == 1){
+            ?>
             <div id="pract">
                 <h4> Answer </h4>
                 <div class="table-responsive">  
@@ -116,7 +119,37 @@ $this->registerJs('
                     </table>                     
                     <?= $form->field($model, 'poin')->textInput() ?>
                 </div>                            
-            </div>    
+            </div>  
+            <?php }else if($model->isNewRecord){
+             ?>   
+              <div id="pract">
+                <h4> Answer </h4>
+                <div class="table-responsive">  
+                    <table class="table table-bordered" id="dynamic_field">  
+                        <?php 
+                            for($i = 1;$i <= 5; $i++){                            
+                                $cheked = '';
+                                $val = '';
+                                if(!$model->isNewRecord){ 
+                                    if(isset($options[$i-1])){
+                                        if($options[$i-1]['iscorrect'] == 1){
+                                            $cheked = 'checked';
+                                    }
+                                    }                           
+                                
+                                    $val = isset($options[$i-1]['optional']) ? 'value ='.$options[$i-1]['optional'] : '';
+                                }
+                            echo' <tr>   
+                                    <td><input type="radio" '.$cheked.' name="answer'.$i.'" ></td>               
+                                    <td><input type="text" '.$val.' name="options'.$i.'" placeholder="Enter your Option" class="form-control name_list" /></td>                                  
+                                </tr>' ; 
+                            }
+                        ?>                   
+                    </table>                     
+                    <?= $form->field($model, 'poin')->textInput() ?>
+                </div>                            
+            </div>  
+            <?php } else echo "";?>  
             <?= $form->field($model, 'hint')->textInput() ?> 
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success','id'=>'submit']) ?>
