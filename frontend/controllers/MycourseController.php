@@ -202,7 +202,7 @@ class MycourseController extends \yii\web\Controller
                 $model->duration = 0;
                 $model->isFinish = 0;
                 $model->detailID = $_POST['dtl'];
-                $model->save();
+                $model->save(false);
                 
             }
             $modelDtl = new Resultcourse;  
