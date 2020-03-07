@@ -76,8 +76,8 @@ class DtlcourseController extends Controller
 
         if ($model->load(Yii::$app->request->post())){
             
-            $point = isset($model->poin) ? $model->poin : 0;
-            $model->courseID = $id;            
+            $model->poin = $model->poin > 0 ? $model->poin : 0;            
+            $model->courseID = $id;                    
             $model->save(false);            
 
             $isCorrect = 0;
