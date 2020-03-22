@@ -32,7 +32,7 @@ $this->registerCss("
 ");
 ?>
 
-<div class="row" style="border-bottom: 1px solid #a9a9a933;">
+<div class="row" style="border-bottom: 1px solid #a9a9a933;display:inline-block">
        
     <h2><?= Html::encode($model['title']) ?><span >
         <?= Html::a('<span class="btn btn-'.($model['score'] <= 50 ? 'warning':'success').'" style="font-size: 17px;">Nilai Anda : '.$model['score'].'</span>',['//site/detail','id'=>$model['courseID']])?></span>
