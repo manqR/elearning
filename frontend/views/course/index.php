@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a('<i class="mdi mdi-eye"></i>',['//dtlcourse/index','id'=>$model->courseID]);
                 },
             ],
+            
             // 'img',
             //'materi',
             //'author',
