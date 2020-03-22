@@ -33,8 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'categoryName',
                 'value'=>'category.categoryName'
             ],  
-            'title',
-            'description:ntext',
+            'title',            
+            [
+                'label'=>'Description',
+                'format' => 'raw',
+                'attribute'=>'description',
+                'value'=>function ($model) {
+                    return $model->description;
+                },
+            ],
             [
                 'label'=>'Action',
                 'format' => 'raw',
@@ -42,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a('<i class="mdi mdi-eye"></i>',['//dtlcourse/index','id'=>$model->courseID]);
                 },
             ],
-            
+
             // 'img',
             //'materi',
             //'author',
