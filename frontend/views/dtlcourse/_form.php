@@ -66,7 +66,7 @@ $(document).ready(function() {
 
 $this->registerJs('
     function checkCat(val){              
-        val == 1 ? $("#pract").css("display", "block") : $("#pract").css("display", "none");
+        val == 1  || val == 3 ? $("#pract").css("display", "block") : $("#pract").css("display", "none");
     }
 ',VIEW::POS_HEAD);
 
@@ -91,7 +91,7 @@ $this->registerJs('
         </div>
         <div class="col-md-6 col-xs-6">
             <?php
-                if(!$model->isNewRecord && $model->detailID == 1){
+                if(!$model->isNewRecord && ($model->detailID == 1 || $model->detailID == 3)){
             ?>
             <div id="pract">
                 <h4> Answer </h4>

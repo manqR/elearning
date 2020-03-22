@@ -37,7 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>'detail.dtlCatCourseName'
             ],  
             'title',
-            'description:ntext',
+            [
+                'label'=>'Description',
+                'format' => 'raw',
+                'attribute'=>'description',
+                'value'=>function ($model) {
+                    return $model->description;
+                },
+            ],
             [
                 'label'=>'CorrectAnswer',
                 'attribute'=>'correctAnswerAlias',

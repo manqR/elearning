@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use  yii\web\View;
 /* @var $model frontend\models\Course */
 
-$this->title = $course->title." - ".($dtl == 1 ? 'Quiz' :  "Practice");
+$this->title = $course->title." - ".$title;
 \yii\web\YiiAsset::register($this);
 
 $this->registerCss("
@@ -48,7 +48,7 @@ $this->registerCss("
 
 $this->registerJs("
     function answer(){
-        if(".$_GET['type']." == 1){
+        if(".$_GET['type']." == 2 || ".$_GET['type']." == 4 ){
             $.post('./?r=mycourse/check-answer',{
                 optID: 1,
                 type:1,
@@ -74,12 +74,13 @@ $this->registerJs("
                     iddetailcourse:".$model->iddetailcourse.",
                     dtl:".$dtl."
                 },
-                function(data, status){	                 
+                function(data, status){	   
+                    console.log(status)              
                     if(status == 'success'){
                         if(data[0]['answer'] == 'correct'){                        
                             $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-success alert-dismissible fade show mdi mdi-check-all\"> Congratulation ! , Your answers is Corected !</i>' );
                         }else{                        
-                            $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-block-helper\"> Sorry ! , Your answers Incorrected ! <b>The Correct answer is '+data[0]['correctAnswer']+'</b></i>' );
+                            $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-block-helper\"> Sorry ! , Your answers Incorrected ! <b></b></i>' );
                         }  
                     
                         $('#submit').css('display','none');               

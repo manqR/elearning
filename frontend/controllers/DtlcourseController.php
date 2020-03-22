@@ -123,30 +123,32 @@ class DtlcourseController extends Controller
 
         if ($model->load(Yii::$app->request->post())){
             
-            $model->save();
+            $model->save(false);
             $isCorrect = 0;
-            foreach($options as $option):
-                $option->delete();
-            endforeach;
+            if($model->detailID == 1 || $model->detailID == 3){
+                foreach($options as $option):
+                    $option->delete();
+                endforeach;
 
-            for($i = 1 ; $i <= 5; $i++){
-                 $options = new Dtlcourseopt();
-                 $options->iddtlcourse = $model->iddetailcourse;
-                 $options->courseID = $model->courseID;
-                 $options->optID = $i;
-                 $options->optional = $_POST['options'.$i];
-                 $options->iscorrect = isset($_POST['answer'.$i]) ? 1 : 0;
-                 $options->save(false);                         
-                 
-                 if(isset($_POST['answer'.$i]) ? 1 : 0 == 1){
-                     $isCorrect = $i;
-                 }
-            }           
+                for($i = 1 ; $i <= 5; $i++){
+                    $options = new Dtlcourseopt();
+                    $options->iddtlcourse = $model->iddetailcourse;
+                    $options->courseID = $model->courseID;
+                    $options->optID = $i;
+                    $options->optional = $_POST['options'.$i];
+                    $options->iscorrect = isset($_POST['answer'.$i]) ? 1 : 0;
+                    $options->save(false);                         
+                    
+                    if(isset($_POST['answer'.$i]) ? 1 : 0 == 1){
+                        $isCorrect = $i;
+                    }
+                }      
+            }     
             $lookUp = DtlCourse::findOne(['iddetailcourse'=>$model->iddetailcourse]);
             $lookUp->correctAnswer = $isCorrect;
             $lookUp->save(false);
             if($lookUp){
-                 Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Course Added !');
+                 Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> Updated !');
                  return $this->redirect(['index','id'=>$model->courseID]);
              }       
 

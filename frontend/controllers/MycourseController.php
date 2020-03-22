@@ -9,6 +9,7 @@ use frontend\models\Usercourse;
 use frontend\models\Dtlcourseopt;
 use frontend\models\Tbloption;
 use frontend\models\Resultcourse;
+use frontend\models\Coursecategory;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\BadRequestHttpException;
@@ -24,18 +25,51 @@ class MycourseController extends \yii\web\Controller
         }                
     }
     public function actionIndex()
-    {
-        $model = Usercourse::findAll(['userID'=>Yii::$app->user->identity->id,'detailID'=>1]);
-        return $this->render('index',[            
+    {        
+        $sql = "SELECT c.* , a.*, b.img, b.title
+                FROM usercourse a 
+                JOIN course b ON a.courseID = b.courseID 
+                JOIN coursecategory c ON b.categoryID = c.categoryID 
+                WHERE a.userID = ".Yii::$app->user->identity->id." AND (a.detailID = 1 OR a.detailID = 3)";
+
+        $model = Yii::$app->db->createCommand($sql)->queryAll();
+        
+        $query = "SELECT DISTINCT c.categoryName
+                FROM usercourse a 
+                JOIN course b ON a.courseID = b.courseID 
+                JOIN coursecategory c ON b.categoryID = c.categoryID 
+                WHERE a.userID = ".Yii::$app->user->identity->id." AND (a.detailID = 1 OR a.detailID = 3)";
+
+        $exec = Yii::$app->db->createCommand($query)->queryAll();
+        // var_dump($model);
+        // echo $query;
+        // die;
+        return $this->render('index',[
+            'model'=>$model,
+            'exec' => $exec
+        ]);
+    }
+    public function actionDetailCourse($id){
+         $sql = "SELECT *
+                FROM usercourse a 
+                JOIN course b ON a.courseID = b.courseID 
+                JOIN coursecategory c ON b.categoryID = c.categoryID 
+                WHERE a.userID = ".Yii::$app->user->identity->id." AND a.urutan = ".$id."";
+
+        $model = Yii::$app->db->createCommand($sql)->queryOne();
+        
+        return $this->render('detail',[
             'model'=>$model
         ]);
     }
     public function actionQuiz($courseID, $userID, $dtl = 1, $r=0, $type){
         if($userID == Yii::$app->user->identity->id){        
-            $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$dtl]);          
+            $title = "";
+            $title = $type == 1 ? 'Tes Formatif 1' : 'Tes Formatif 2';
+            $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$type]);          
             $model = Dtlcourse::find()                    
                     ->Where(['courseID'=>$courseID])
-                    ->AndWhere(['detailID'=>$dtl])
+                    ->AndWhere(['detailID'=>$type])
                     ->orderBy(['iddetailcourse'=>SORT_ASC])
                     ->One();
             if($model){                
@@ -50,7 +84,7 @@ class MycourseController extends \yii\web\Controller
                     // die;
                     $r = 1;
                 }
-                $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$dtl]);          
+                $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$type]);          
                 if($lastCourse){                    
                    
                     $last =  Resultcourse::find()
@@ -65,7 +99,7 @@ class MycourseController extends \yii\web\Controller
                     $model = Dtlcourse::find()
                             ->where(['>','iddetailcourse',$last->iddetailcourse])
                             ->AndWhere(['courseID'=>$courseID])
-                            ->AndWhere(['detailID'=>$dtl])
+                            ->AndWhere(['detailID'=>$type])
                             ->One();
                     if(!$model){                          
                         $lastCourse->isFinish = 1;
@@ -88,7 +122,8 @@ class MycourseController extends \yii\web\Controller
                 return $this->render('question',[
                     'model'=>$model,
                     'course' =>$course,
-                    'dtl'=>$dtl,
+                    'title' => $title,
+                    'dtl'=>$type,
                     'no' => $no,
                     'option' => $option
                 ]);
@@ -101,13 +136,14 @@ class MycourseController extends \yii\web\Controller
     }
     public function actionPractice($courseID, $userID,$dtl = 2,$r=0,$type){
         if($userID == Yii::$app->user->identity->id){  
-          
+            $title = "";
+            $title = $type == 1 ? 'Latihan 1' : 'Latihan 2';
             $course = Course::findOne(['courseID'=>$courseID]);
-            $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$dtl]);
+            $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$type]);
 
             $model = Dtlcourse::find()                    
                     ->Where(['courseID'=>$courseID])
-                    ->AndWhere(['detailID'=>$dtl])
+                    ->AndWhere(['detailID'=>$type])
                     ->orderBy(['iddetailcourse'=>SORT_ASC])
                     ->One();
             if($model){
@@ -121,7 +157,7 @@ class MycourseController extends \yii\web\Controller
                     $lastCourse->delete();                                        
                     $r = 1;
                 }
-                $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$dtl]);
+                $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$type]);
                 if($lastCourse){
                     $last =  Resultcourse::find()
                             ->where(['urutan'=>$lastCourse->urutan])
@@ -135,7 +171,7 @@ class MycourseController extends \yii\web\Controller
                     $model = Dtlcourse::find()
                             ->where(['>','iddetailcourse',$last->iddetailcourse])
                             ->AndWhere(['courseID'=>$courseID])
-                            ->AndWhere(['detailID'=>$dtl])
+                            ->AndWhere(['detailID'=>$type])
                             ->One();
                     if(!$model){
                         $lastCourse->isFinish = 1;
@@ -156,8 +192,9 @@ class MycourseController extends \yii\web\Controller
 
                 return $this->render('question',[
                     'model'=>$model,
+                    'title' => $title,
                     'course' =>$course,
-                    'dtl' => $dtl,
+                    'dtl' => $type,
                     'no' => $no,
                     'option' => $option
                 ]);
@@ -173,6 +210,7 @@ class MycourseController extends \yii\web\Controller
             $correct= 0;
             $output = array();
             $poin = 0;
+           
             if($findAnswer->correctAnswer == $_POST['optID']){
                 $correct = 1;
                 $poin = $findAnswer->poin;
@@ -187,8 +225,8 @@ class MycourseController extends \yii\web\Controller
             $model = Usercourse::findOne(['userID'=>Yii::$app->user->identity->id, 'courseID'=>$_POST['courseID'],'detailID'=>$_POST['dtl']]);
             if($model){
                 
-                $lastScore = ($_POST['type'] == 1 ? 0: ($model->score / 100) * $sum);                
-                $model->score = ($_POST['type'] == 1 ? 0: (($lastScore + $poin) / $sum ) * 100);                
+                $lastScore = ($_POST['type'] == 2|| $_POST['type'] == 4 ? 0: ($model->score / 100) * $sum);                
+                $model->score = ($_POST['type'] == 2 || $_POST['type'] == 4 ? 0: (($lastScore + $poin) / $sum ) * 100);                
                 $model->endDate = date('Y-m-d H:i:s');
                 $model->save(false);
             }else{

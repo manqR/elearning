@@ -2,7 +2,7 @@
 use frontend\models\Course;
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Elearning';
 
 $this->registerCss("
 .main {
@@ -100,23 +100,33 @@ $('.slider-nav').slick({
                         foreach($course as $courses):
 
                           $connection = \Yii::$app->db;
-                          $sql = $connection->createCommand("SELECT COUNT(*) jml, b.dtlCatCourseName catName, b.detailID
-                                                             FROM dtlcourse a 
-                                                             JOIN dtlcoursecategory b ON a.detailID = b.detailID 
-                                                             WHERE a.courseID = '".$courses->courseID."'
-                                                             GROUP BY b.dtlCatCourseName, b.detailID");
+                          $sql = $connection->createCommand("SELECT  CASE WHEN `group` = 1 THEN 'Tes Formatif' 
+                                                                      ELSE 'Latihan' END keterangan
+                                                                    ,COUNT(DISTINCT x.dtlCatCourseName) jml
+                                                                    ,`group`
+                                                              FROM dtlcoursecategory x JOIN (	  
+                                                              SELECT a.*
+                                                              FROM dtlcourse a 
+                                                              JOIN dtlcoursecategory b ON a.detailID = b.detailID 
+                                                              WHERE a.courseID = '".$courses->courseID."'
+                                                              ) t    
+                                                              ON x.detailID = t.detailID     
+                                                              GROUP BY `group`");
                                                         
                           $mode = $sql->queryAll();  
                           
                          $practice = 0;
-                         $quiz = 0;
-                         foreach($mode as $modes):
-                          if($modes['detailID'] ==  "2"){
-                           $practice = $modes['jml'];
-                          }                          
-                          $quiz =  (isset($modes['jml']) && $modes['detailID'] == "1" ? $modes['jml'] : "0");
-                         endforeach;
-                   
+                         $quiz = 0;            
+                        foreach($mode as $modes):
+                          // echo $courses->courseID.'|'.$modes['group'].' - '.$modes['jml'];
+                          if($modes['group'] == 1){
+                            $quiz = $modes['jml'];
+                          }else{
+                            $practice = $modes['jml'];
+                          }
+                        endforeach;
+
+                  
                           
                     ?>
                       <a  class="box" href="?r=site/detail&id=<?= $courses->courseID ?>">
