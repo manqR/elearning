@@ -108,11 +108,12 @@ $this->registerJs('
                                         }
                                     }                           
                                 
-                                    $val = isset($options[$i-1]['optional']) ? 'value ='.$options[$i-1]['optional'] : '';
+                                    $val = isset($options[$i-1]['optional']) ? $options[$i-1]['optional'] : '';
+                                    // $val == "name=options4" ? '' : $val;
                                 }
                             echo' <tr>   
                                     <td><input type="radio" '.$cheked.' name="answer'.$i.'" ></td>               
-                                    <td><input type="text" '.$val.' name="options'.$i.'" placeholder="Enter your Option" class="form-control name_list" /></td>                                  
+                                    <td><input type="text" value="'.$val.'"  name="options'.$i.'" placeholder="Enter your Option" class="form-control name_list" /></td>                                  
                                 </tr>' ; 
                             }
                         ?>                   
