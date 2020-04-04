@@ -105,7 +105,7 @@ $this->registerJs('
                                     if(isset($options[$i-1])){
                                         if($options[$i-1]['iscorrect'] == 1){
                                             $cheked = 'checked';
-                                    }
+                                        }
                                     }                           
                                 
                                     $val = isset($options[$i-1]['optional']) ? 'value ='.$options[$i-1]['optional'] : '';

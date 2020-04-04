@@ -82,6 +82,7 @@ class DtlcourseController extends Controller
 
             $isCorrect = 0;
            for($i = 1 ; $i <= 5; $i++){
+             if(isset($_POST['options'.$i])){
                 $options = new Dtlcourseopt();
                 $options->iddtlcourse = $model->iddetailcourse;
                 $options->courseID = $id;
@@ -89,7 +90,7 @@ class DtlcourseController extends Controller
                 $options->optional = $_POST['options'.$i];
                 $options->iscorrect = isset($_POST['answer'.$i]) ? 1 : 0;
                 $options->save();                         
-                
+             }
                 if(isset($_POST['answer'.$i]) ? 1 : 0 == 1){
                     $isCorrect = $i;
                 }
@@ -120,7 +121,7 @@ class DtlcourseController extends Controller
         $model = $this->findModel($id);
         $options = Dtlcourseopt::findAll(['iddtlcourse'=>$id]);
 
-
+        
         if ($model->load(Yii::$app->request->post())){
             
             $model->save(false);
@@ -131,13 +132,16 @@ class DtlcourseController extends Controller
                 endforeach;
 
                 for($i = 1 ; $i <= 5; $i++){
-                    $options = new Dtlcourseopt();
-                    $options->iddtlcourse = $model->iddetailcourse;
-                    $options->courseID = $model->courseID;
-                    $options->optID = $i;
-                    $options->optional = $_POST['options'.$i];
-                    $options->iscorrect = isset($_POST['answer'.$i]) ? 1 : 0;
-                    $options->save(false);                         
+                    if(isset($_POST['options'.$i])){
+                        $options = new Dtlcourseopt();
+                        $options->iddtlcourse = $model->iddetailcourse;
+                        $options->courseID = $model->courseID;
+                        $options->optID = $i;
+                        $options->optional = $_POST['options'.$i];
+                        $options->iscorrect = isset($_POST['answer'.$i]) ? 1 : 0;
+                        $options->save(false);        
+                    } 
+                                     
                     
                     if(isset($_POST['answer'.$i]) ? 1 : 0 == 1){
                         $isCorrect = $i;
