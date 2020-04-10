@@ -121,7 +121,7 @@ $this->registerJs("
             echo "<button class='answer btn btn-success' id='submit' onClick='answer()'> Submit Jawaban</button><span class='msg-err'></span>";      
             echo "<button class='answer btn btn-success' id='next' style='display:none' onClick='location.reload();'> Lanjut &raquo; </button>";      
             echo "<button class='answer btn btn-success' id='finish' style='display:none' onClick='location.reload();'> Lihat Hasil &raquo; </button>";      
-        if($dtl == 2 ){
+        if($dtl == 2  || $dtl == 4){
     ?>
         <div class="alert alert-icon alert-info alert-dismissible fade show" style="margin-left: 45px;"role="alert">
             <button type="button" class="close" data-dismiss="alert"
