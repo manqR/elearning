@@ -79,8 +79,8 @@ class UserController extends Controller
 
             $model->password_hash =Yii::$app->security->generatePasswordHash($model->password_hash);
             $model->auth_key =Yii::$app->security->generateRandomString();
-            $model->created_at = date('Ymdhis');
-            $model->updated_at = date('Ymdhis');
+            $model->created_at = substr(date('Ymdhis'), 0, 11);
+            $model->updated_at = substr(date('Ymdhis'), 0, 11);         
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> User Added !');
                 return $this->redirect(['index']);
