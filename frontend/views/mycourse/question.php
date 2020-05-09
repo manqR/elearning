@@ -51,13 +51,13 @@ $this->registerJs("
         if(".$_GET['type']." == 2 || ".$_GET['type']." == 4 ){
             $.post('./?r=mycourse/check-answer',{
                 optID: 1,
-                type:1,
+                type:".$_GET['type'].",
                 courseID:".$course->courseID.",
                 iddetailcourse:".$model->iddetailcourse.",
                 dtl:".$dtl."
             },
             function(data, status){	 
-                location.reload();
+                 location.reload();
             })
         }else{
             var answerRadio = document.querySelector(\"input[name=answers]:checked\");
