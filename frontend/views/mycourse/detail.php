@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use frontend\models\Course;
 use frontend\models\Tbloption;
+use frontend\models\DtlCourse;
 use frontend\models\Resultcourse;
 
 $this->title='Riwayat Modul';
@@ -53,13 +54,18 @@ $this->registerCss("
                         ->Andwhere(['detailID'=>$model['detailID']])       
                         ->orderBy(['iddetailcourse'=>SORT_ASC])                 
                         ->all();  
+            $showResult = DtlCourse::find()
+                        ->Where(['courseID'=>$model['courseID']])
+                        ->AndWhere(['detailID'=>$model['detailID']])
+                        ->orderBy(['iddetailcourse'=>SORT_ASC])                 
+                        ->all();  
             echo "<div style='margin:15px;display:block'>";      
             foreach($showResult as $i => $showResults):
-                if($showResults->answer == $showResults->iddetailcourse0->correctAnswer){
+                // if($showResults->answer == $showResults->iddetailcourse0->correctAnswer){
                     $i = $i +1;
-                    $optList = Tbloption::findOne(['id'=>$showResults->answer]);
+                    $optList = Tbloption::findOne(['id'=>$showResults->correctAnswer]);
                     echo "<li class='text-success'> Pertanyaan Nomor ". $i .". Jawaban Benar ".$optList->alias."</li>";
-                }                
+                // }                
             endforeach;
             echo "</div>";
             // die;
