@@ -38,7 +38,7 @@ class Dtlcourseopt extends \yii\db\ActiveRecord
         return [
             [['iddtlcourse', 'courseID', 'optID', 'optional', 'iscorrect'], 'required'],
             [['iddtlcourse', 'courseID', 'optID', 'iscorrect'], 'integer'],
-            [['optional'], 'string', 'max' => 50],
+            [['optional'], 'string', 'max' => 1000],
             [['courseID'], 'exist', 'skipOnError' => true, 'targetClass' => Course::className(), 'targetAttribute' => ['courseID' => 'courseID']],
             [['iddtlcourse'], 'exist', 'skipOnError' => true, 'targetClass' => Dtlcourse::className(), 'targetAttribute' => ['iddtlcourse' => 'iddetailcourse']],
             [['optID'], 'exist', 'skipOnError' => true, 'targetClass' => Tbloption::className(), 'targetAttribute' => ['optID' => 'id']],

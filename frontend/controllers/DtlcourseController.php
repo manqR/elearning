@@ -89,7 +89,7 @@ class DtlcourseController extends Controller
                 $options->optID = $i;
                 $options->optional = $_POST['options'.$i];
                 $options->iscorrect = isset($_POST['answer'.$i]) ? 1 : 0;
-                $options->save();                         
+                $options->save(false);                         
              }
                 if(isset($_POST['answer'.$i]) ? 1 : 0 == 1){
                     $isCorrect = $i;
