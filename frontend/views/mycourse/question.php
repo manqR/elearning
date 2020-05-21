@@ -17,6 +17,7 @@ $this->registerCss("
     }
     .questions{
         display:flex;
+        flex-direction: column;
       
     }
     p{
@@ -116,9 +117,9 @@ $this->registerJs("
                     $opt .= "<span class='opt'><input type='radio' name='answers'  value=".$options->optID." />". $options->opt->alias." .".$options->optional."</span><i class='msg'></i>";                         
             endforeach;    
 
-            echo "<div class='question'><span class='questions'>".$no .". ".$model->description."</span>$opt</div>";  
+            echo "<div class='question'><span class='questions'>".$model->description."</span>$opt</div>";  
            
-            echo "<button class='answer btn btn-success' id='submit' onClick='answer()'> Submit Jawaban</button><span class='msg-err'></span>";      
+            echo "<button class='answer btn btn-success' id='submit' onClick='answer()'> Lanjut</button><span class='msg-err'></span>";      
             echo "<button class='answer btn btn-success' id='next' style='display:none' onClick='location.reload();'> Lanjut &raquo; </button>";      
             echo "<button class='answer btn btn-success' id='finish' style='display:none' onClick='location.reload();'> Lihat Hasil &raquo; </button>";      
         if($dtl == 2  || $dtl == 4){
