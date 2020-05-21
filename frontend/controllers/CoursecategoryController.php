@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * CoursecategoryController implements the CRUD actions for Coursecategory model.
  */
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class CoursecategoryController extends Controller
 {
     /**

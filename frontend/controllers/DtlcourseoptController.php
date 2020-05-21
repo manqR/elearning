@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * DtlcourseoptController implements the CRUD actions for Dtlcourseopt model.
  */
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class DtlcourseoptController extends Controller
 {
     /**

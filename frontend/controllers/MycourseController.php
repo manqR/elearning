@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
 
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class MycourseController extends \yii\web\Controller
 {
     public function beforeAction($action){

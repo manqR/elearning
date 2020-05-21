@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * TbloptionController implements the CRUD actions for Tbloption model.
  */
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class TbloptionController extends Controller
 {
     /**

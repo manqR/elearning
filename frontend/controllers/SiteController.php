@@ -91,7 +91,7 @@ class SiteController extends Controller
     }
     public function actionMateri($id){
         $model = $this->findModel($id);
-        $completePath = '../../asset/materi/'.$model->materi;
+        $completePath = 'asset/materi/'.$model->materi;
         // var_dump($model->materi);
         // die;
         return Yii::$app->response->sendFile($completePath, $model->materi, ['inline'=>true]);

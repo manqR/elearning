@@ -6,7 +6,7 @@ use yii\helpers\ArrayHelper;
 use frontend\models\Dtlcoursecategory;
 use yii\web\View;
 
-include '../../asset/inc/table.php';
+include 'asset/inc/table.php';
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Dtlcourse */

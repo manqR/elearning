@@ -10,7 +10,7 @@
 <div class="left side-menu">
     <div class="user-details">
         <div class="pull-left">
-            <img src="../../asset/images/users/avatar-1.jpg" alt="" class="thumb-md rounded-circle">
+            <img src="asset/images/users/avatar-1.jpg" alt="" class="thumb-md rounded-circle">
         </div>
         <div class="user-info">
             <a href="#"><?= isset(Yii::$app->user->identity->username)  ? Yii::$app->user->identity->username : 'Guest !' ?></a>            

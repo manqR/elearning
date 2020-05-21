@@ -40,7 +40,7 @@ $this->registerCss("
     </h2> 
     <p class="name">Nama : <?= Yii::$app->user->identity->name; ?></p>   
     <div class="card card-block" style="border: none;border: none;align-items: center;margin: 40px;">        
-        <img class="cover" src="../../asset/images/course/<?= $model['img'] ?>" />        
+        <img class="cover" src="asset/images/course/<?= $model['img'] ?>" />        
     </div>              
     
     <div class="card card-block"  style="margin: 10px 10px 10px 0px;border: none">

@@ -4,7 +4,7 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Users;
 
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class ProfileController extends \yii\web\Controller
 {
     public function beforeAction($action){

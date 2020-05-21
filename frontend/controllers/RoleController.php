@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * RoleController implements the CRUD actions for Role model.
  */
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class RoleController extends Controller
 {
     /**

@@ -13,7 +13,7 @@ use common\models\User;
  * UserController implements the CRUD actions for User model.
  */
 
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class UserController extends Controller
 {
     /**

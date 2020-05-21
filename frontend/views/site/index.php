@@ -131,7 +131,7 @@ $('.slider-nav').slick({
                     ?>
                       <a  class="box" href="?r=site/detail&id=<?= $courses->courseID ?>">
                       <div>
-                        <h3 style="background-image: url('../../asset/images/course/<?= $courses->img ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3>
+                        <h3 style="background-image: url('asset/images/course/<?= $courses->img ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3>
                         <div class="textBox">
                           <span style="word-break: break-all;font-size:15px;display:block"><?= $courses->title ?></span>
                            <span class="ti-tag" style="font-size: 11px; font-weight: bold;float: right; margin-top: 5px; "><?= $practice. " Latihan" ?></span>

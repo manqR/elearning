@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * DtlcourseController implements the CRUD actions for Dtlcourse model.
  */
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class DtlcourseController extends Controller
 {
     /**

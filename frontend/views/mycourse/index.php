@@ -125,7 +125,7 @@ $('.slider-nav').slick({
                     ?>
                       <a  class="box" href="?r=mycourse/detail-course&id=<?= $models['urutan'] ?>">
                       <div>
-                        <h3 style="background-image: url('../../asset/images/course/<?= $models['img'] ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3>
+                        <h3 style="background-image: url('asset/images/course/<?= $models['img'] ?>');width: 258px;height: 198px;background-size: 258px 198px;"></h3>
                         <div class="textBox">
                           <span style="word-break: break-all;font-size:15px;display:block"><?= $models['title'].' - '. ($models['detailID'] == 1 ? '<b> Tes Formatif 1</b> <span class="btn btn-'.($models['score'] <= 50 ? 'warning':'success').'" style="font-size: 12px;">Nilai Anda : '.$models['score'].'</span>': '<b> Tes Formatif 2</b> <span class="btn btn-'.($models['score'] <= 50 ? 'warning':'success').'" style="font-size: 12px;">Nilai Anda : '.$models['score'].'</span>')  ?></span>                                                    
                         </div>

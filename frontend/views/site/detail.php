@@ -53,7 +53,7 @@ endforeach;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="card card-block" style="border: none;border: none;align-items: center;margin: 40px;">        
-        <img class="cover" src="../../asset/images/course/<?= $model->img ?>" />
+        <img class="cover" src="asset/images/course/<?= $model->img ?>" />
     </div>              
     
     <div class="card card-block"  style="margin: 10px 10px 10px 0px;border: none">

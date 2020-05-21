@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * CourseController implements the CRUD actions for Course model.
  */
-include '../../asset/inc/auth.php';
+include 'asset/inc/auth.php';
 class CourseController extends Controller
 {
     /**
@@ -80,10 +80,10 @@ class CourseController extends Controller
             if ($model->img || $model->materi){
                 
 
-                $model->img->saveAs('../../asset/images/course/' .sha1($model->img). '.' . $model->img->extension);
+                $model->img->saveAs('asset/images/course/' .sha1($model->img). '.' . $model->img->extension);
                 $model->img =  sha1($model->img). '.' . $model->img->extension; 
 
-                $model->materi->saveAs('../../asset/materi/' .sha1($model->materi). '.' . $model->materi->extension);
+                $model->materi->saveAs('asset/materi/' .sha1($model->materi). '.' . $model->materi->extension);
                 $model->materi = sha1($model->materi). '.' . $model->materi->extension; 
                 
                 $model->create_date = date('Y-m-d H:i:s');
@@ -116,12 +116,12 @@ class CourseController extends Controller
             $model->img = UploadedFile::getInstance($model, 'img');
 
             if (isset($model->img)){                                
-                $model->img->saveAs('../../asset/images/course/' .sha1($model->img). '.' . $model->img->extension);
+                $model->img->saveAs('asset/images/course/' .sha1($model->img). '.' . $model->img->extension);
                 $model->img =  sha1($model->img). '.' . $model->img->extension;                                
             }   
             
             if(isset($model->materi)){
-                $model->materi->saveAs('../../asset/materi/' .sha1($model->materi). '.' . $model->materi->extension);
+                $model->materi->saveAs('asset/materi/' .sha1($model->materi). '.' . $model->materi->extension);
                 $model->materi = sha1($model->materi). '.' . $model->materi->extension; 
                 
             }
