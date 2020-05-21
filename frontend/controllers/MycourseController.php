@@ -137,7 +137,7 @@ class MycourseController extends \yii\web\Controller
     public function actionPractice($courseID, $userID,$dtl = 2,$r=0,$type){
         if($userID == Yii::$app->user->identity->id){  
             $title = "";
-            $title = $type == 1 ? 'Latihan 1' : 'Latihan 2';
+            $title = $type == 2 ? 'Latihan 1' : 'Latihan 2';
             $course = Course::findOne(['courseID'=>$courseID]);
             $lastCourse = Usercourse::findOne(['userID'=>$userID,'courseID'=>$courseID,'detailID'=>$type]);
 
