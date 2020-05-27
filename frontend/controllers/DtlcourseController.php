@@ -82,7 +82,8 @@ class DtlcourseController extends Controller
 
             $isCorrect = 0;
            for($i = 1 ; $i <= 5; $i++){
-             if(isset($_POST['options'.$i])){
+             if($_POST['options'.$i] != ''){                 
+                 
                 $options = new Dtlcourseopt();
                 $options->iddtlcourse = $model->iddetailcourse;
                 $options->courseID = $id;
@@ -94,7 +95,7 @@ class DtlcourseController extends Controller
                 if(isset($_POST['answer'.$i]) ? 1 : 0 == 1){
                     $isCorrect = $i;
                 }
-           }           
+           }              
            $lookUp = DtlCourse::findOne(['iddetailcourse'=>$model->iddetailcourse]);
            $lookUp->correctAnswer = $isCorrect;
            $lookUp->save(false);
@@ -132,7 +133,7 @@ class DtlcourseController extends Controller
                 endforeach;
 
                 for($i = 1 ; $i <= 5; $i++){
-                    if(isset($_POST['options'.$i])){
+                    if($_POST['options'.$i] != ''){
                         $options = new Dtlcourseopt();
                         $options->iddtlcourse = $model->iddetailcourse;
                         $options->courseID = $model->courseID;

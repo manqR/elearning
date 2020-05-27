@@ -49,6 +49,8 @@ $this->registerCss("
 
 $this->registerJs("
     function answer(){
+        $('#submit').prop('disabled', true);
+        
         if(".$_GET['type']." == 2 || ".$_GET['type']." == 4 ){
             $.post('./?r=mycourse/check-answer',{
                 optID: 1,
@@ -62,8 +64,8 @@ $this->registerJs("
             })
         }else{
             var answerRadio = document.querySelector(\"input[name=answers]:checked\");
-            if (document.querySelectorAll('input[type=\"radio\"]:checked').length === 0){
-                console.log('tidak ada dipilih')            
+            if (document.querySelectorAll('input[type=\"radio\"]:checked').length === 0){                
+                $('#submit').prop('disabled', false);    
                 $('span.msg-err').html('').append('<i class=\"alert alert-icon alert-danger alert-dismissible fade show mdi mdi-alert\"> Please select the correct answer !</i>' );
             }else{            
                 $('span.msg-err').html('').append('' );
@@ -87,10 +89,14 @@ $this->registerJs("
                         $('#submit').css('display','none');               
                         $('#next').css('display','block');     
                         $('#finish').css('display','none');    
+                        $('#back').css('display','none');    
 
                         if(data[0]['isFinish'] == true){
                             $('#next').css('display','none'); 
                             $('#finish').css('display','block'); 
+                            $('#back').css('display','block'); 
+                            console.log(data[0]['score'])
+                            swal('Tes Formatif Selesai!', 'Nilai Anda '+data[0]['score'], 'success');
                         }                              
                         $('input[name=answers]').attr(\"disabled\",true);                            
                     }else{
@@ -121,6 +127,7 @@ $this->registerJs("
            
             echo "<button class='answer btn btn-success' id='submit' onClick='answer()'> Lanjut</button><span class='msg-err'></span>";      
             echo "<button class='answer btn btn-success' id='next' style='display:none' onClick='location.reload();'> Lanjut &raquo; </button>";      
+            echo "<a href='?r=site/detail&id=".$course->courseID."' class='answer btn btn-warning' id='back' style='display:none;margin-left:10px'>&laquo; Kembali ke Modul  </a>";      
             echo "<button class='answer btn btn-success' id='finish' style='display:none' onClick='location.reload();'> Lihat Hasil &raquo; </button>";      
         if($dtl == 2  || $dtl == 4){
     ?>

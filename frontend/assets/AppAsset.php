@@ -21,7 +21,8 @@ class AppAsset extends AssetBundle
         'asset/css/metismenu.min.css',
         'asset/plugins/sweet-alert2/sweetalert2.min.css',
         'asset/css/style.css',
-        'asset/plugins/summernote/summernote-bs4.css',        
+        'asset/plugins/summernote/summernote-bs4.css', 
+        'asset/sweetalert/dist/sweetalert.css',          
         
         
     ];
@@ -41,6 +42,7 @@ class AppAsset extends AssetBundle
         'asset/js/jquery.core.js',
         'asset/js/jquery.app.js',
         'asset/inc/apiTable.js',
+        'asset/sweetalert/dist/sweetalert.min.js',
         'asset/plugins/summernote/summernote-bs4.min.js',
     ];
     public $depends = [

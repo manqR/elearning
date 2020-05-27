@@ -266,7 +266,8 @@ class MycourseController extends \yii\web\Controller
             $output = array(
                 'answer'=>($correct == 1 ? 'correct': ''),
                 // 'correctAnswer'=>($_POST['type'] == 1 ? 'A' :$opt->alias),
-                'isFinish'=>$isFinish
+                'isFinish'=>$isFinish,
+                'score'=> $model->score
              );
           
             $data = [
