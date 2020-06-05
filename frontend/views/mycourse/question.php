@@ -60,7 +60,14 @@ $this->registerJs("
                 dtl:".$dtl."
             },
             function(data, status){	 
-                 location.reload();
+                console.log('data',data[0]['isFinish']);
+                if(data[0]['isFinish'] == true){
+                    $('#submit').css('display','none');               
+                    $('#finish').css('display','block'); 
+                    $('#back').css('display','block'); 
+                }else{
+                    location.reload();
+                }                
             })
         }else{
             var answerRadio = document.querySelector(\"input[name=answers]:checked\");

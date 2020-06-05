@@ -14,7 +14,7 @@ $this->registerCss("
   h3 {      
       color: #FFF;
       font-size: 24px;      
-      margin: 10px;
+      margin: 8%;
       padding: 2%;
       position: relative;
       text-align: center;
