@@ -34,11 +34,11 @@ $(document).ready(function() {
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6,'class'=>'summernote'])->label('Deskripsi') ?>
 
-    <?= $form->field($model, 'img')->fileInput(['class'=>'form-control'])->label('Image Covered') ?>
+    <?= $form->field($model, 'img')->fileInput(['class'=>'form-control'])->label('Gambar Sampul') ?>
 
     <?= $form->field($model, 'materi')->fileInput(['class'=>'form-control']) ?>
 
-    <?= $form->field($model, 'author')->textInput(['maxlength' => true,'value'=>Yii::$app->user->identity->username]) ?>
+    <?= $form->field($model, 'author')->textInput(['maxlength' => true,'value'=>Yii::$app->user->identity->username])->label('Pembuat') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

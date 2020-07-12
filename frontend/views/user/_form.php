@@ -16,21 +16,15 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label("Nama Pengguna") ?>
     
     <?= $form->field($model, 'roleID')-> dropDownList(
 			ArrayHelper::map(Role::find()->all(),'idrole','role_name'),
-			['prompt'=>'- Choose -','style' => 'width: 100%;height:40px'])->label('Role');  ?>		
-
-    <?php
-        if($model->isNewRecord){      
-        
-    ?>
-    <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true])->label('Password') ?>
-    <?php } ?>
+			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px'])->label('Peranan');  ?>		
+    <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true])->label('Password') ?>    
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')-> dropDownList(['10'=>'Enabled',9=>'Disabled'],
+    <?= $form->field($model, 'status')-> dropDownList(['10'=>'Aktif',9=>'Non-Aktif'],
 			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px'])  ?>		  
 
     <div class="form-group">

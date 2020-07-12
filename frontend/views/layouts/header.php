@@ -38,7 +38,7 @@
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">                            
 
                     <!-- item-->
-                    <?= Html::a('<i class="ti-settings"></i> <span style="font-size:14px">Ganti Password</span>',['//site/change-password'],['class'=>'dropdown-item notify-item'])?>                    
+                    <!-- <?= Html::a('<i class="ti-settings"></i> <span style="font-size:14px">Ganti Password</span>',['//site/change-password'],['class'=>'dropdown-item notify-item'])?>                     -->
                   
                    
                     <?=				  

@@ -27,7 +27,7 @@ use frontend\models\Dtlcoursecategory;
 
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>        
+        <?= Html::submitButton('Cari', ['class' => 'btn btn-primary']) ?>        
     </div>
 
     <?php ActiveForm::end(); ?>

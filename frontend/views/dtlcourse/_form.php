@@ -80,12 +80,12 @@ $this->registerJs('
         <div class="col-md-6 col-xs-6">
         <?php $form = ActiveForm::begin(); ?>            
 
-            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true])->label('Judul') ?>
             <?= $form->field($model, 'detailID')-> dropDownList(
 			ArrayHelper::map(Dtlcoursecategory::find()->all(),'detailID','dtlCatCourseName'),
-			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px', 'onChange'=>'checkCat(this.value)'])->label('Course Category Detail');  ?>		
+			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px', 'onChange'=>'checkCat(this.value)'])->label('Detail Kategori Modul');  ?>		
 
-            <?= $form->field($model, 'description')->textarea(['rows' => 3,'class'=>'summernote']) ?>
+            <?= $form->field($model, 'description')->textarea(['rows' => 3,'class'=>'summernote'])->label('Deskripsi') ?>
 
                        
         </div>
@@ -94,7 +94,7 @@ $this->registerJs('
                 if(!$model->isNewRecord && ($model->detailID == 1 || $model->detailID == 3)){
             ?>
             <div id="pract">
-                <h4> Answer </h4>
+                <h4> Pilihan Jawaban </h4>
                 <div class="table-responsive">  
                     <table class="table table-bordered" id="dynamic_field">  
                         <?php 
@@ -124,7 +124,7 @@ $this->registerJs('
             <?php }else if($model->isNewRecord){
              ?>   
               <div id="pract">
-                <h4> Answer </h4>
+                <h4> Jawaban Pilihan </h4>
                 <div class="table-responsive">  
                     <table class="table table-bordered" id="dynamic_field">  
                         <?php 
@@ -142,7 +142,7 @@ $this->registerJs('
                                 }
                             echo' <tr>   
                                     <td><input type="radio" '.$cheked.' name="answer'.$i.'" ></td>               
-                                    <td><input type="text" '.$val.' name="options'.$i.'" placeholder="Enter your Option" class="form-control name_list" /></td>                                  
+                                    <td><input type="text" '.$val.' name="options'.$i.'" placeholder="Masukan Pilihan Jawaban" class="form-control name_list" /></td>                                  
                                 </tr>' ; 
                             }
                         ?>                   
@@ -151,7 +151,7 @@ $this->registerJs('
                 </div>                            
             </div>  
             <?php } else echo "";?>  
-            <?= $form->field($model, 'hint')->textInput() ?> 
+            <?= $form->field($model, 'hint')->textInput()->label('Petunjuk') ?> 
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success','id'=>'submit']) ?>
             </div>        

@@ -8,7 +8,7 @@ use frontend\models\Role;
 /* @var $searchModel frontend\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Pengguna';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Add User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Pengguna', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             'name',
             [
-                'label'=>'Role',                
+                'label'=>"Peranan",                
                 'format' => 'raw',
                 'value'=>function ($model) {
                     $role = Role::findOne(['idrole'=>$model->roleID]);

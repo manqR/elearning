@@ -13,15 +13,15 @@
                     <table>
                         <tbody>
                             <tr valign="top">
-                                <td class="left" bgcolor="#EEEEEE"><b>Category ID</b> </td>
+                                <td class="left" bgcolor="#EEEEEE"><b>Kategori</b> </td>
                                 <td>'.$model['categoryName'].'</td> 
-                                <td class="left" bgcolor="#EEEEEE"><b>Title</b> </td>
+                                <td class="left" bgcolor="#EEEEEE"><b>Judul</b> </td>
                                 <td>'.$model['title'].'</td>    
                             </tr>
                             <tr valign="top">
-                                <td class="left" bgcolor="#EEEEEE"><b>Author</b> </td>
+                                <td class="left" bgcolor="#EEEEEE"><b>Pembuat</b> </td>
                                 <td>'.$model['author'].'</td> 
-                                <td class="left" bgcolor="#EEEEEE"><b>Create Date</b> </td>
+                                <td class="left" bgcolor="#EEEEEE"><b>Tanggal Buat</b> </td>
                                 <td>'.$model['create_date'].'</td>       
                             </tr>                            
 

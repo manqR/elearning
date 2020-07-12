@@ -32,13 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             
             [
-                'label'=>'Category',
+                'label'=>'Kategori',
                 'attribute'=>'categoryName',
                 'value'=>'detail.dtlCatCourseName'
             ],  
-            'title',
             [
-                'label'=>'Description',
+                'label'=>'Judul',                
+                'attribute'=>'title',
+            ],   
+            [
+                'label'=>'Deskripsi',
                 'format' => 'raw',
                 'attribute'=>'description',
                 'value'=>function ($model) {
@@ -46,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'label'=>'CorrectAnswer',
+                'label'=>'Jawaban Benar',
                 'attribute'=>'correctAnswerAlias',
                 'value'=>'correctAnswer0.alias'
             ],              

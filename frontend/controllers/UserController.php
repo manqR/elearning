@@ -82,12 +82,10 @@ class UserController extends Controller
             $model->created_at = substr(date('Ymdhis'), 0, 10);
             $model->updated_at = substr(date('Ymdhis'), 0, 10);         
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', '<strong>Successfully !</strong> User Added !');
+                Yii::$app->session->setFlash('success', '<strong>Berhasil !</strong> Data Pengguna ditambahkan!');
                 return $this->redirect(['index']);
             }
         }
-
-
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -104,9 +102,14 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $user = User::findOne($id);
+    
+        if ($model->load(Yii::$app->request->post())){
+          
+            if ($model->save()) {
+                Yii::$app->session->setFlash('success', '<strong>Sukses !</strong> Pengguna Berhasil di perbaharui !');
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->render('update', [

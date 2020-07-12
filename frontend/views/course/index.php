@@ -29,13 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             
             [
-                'label'=>'Category',
+                'label'=>'Kategori',
                 'attribute'=>'categoryName',
                 'value'=>'category.categoryName'
             ],  
-            'title',            
             [
-                'label'=>'Description',
+                'label'=>'Judul',                
+                'attribute'=>'title',
+            ],          
+            [
+                'label'=>'Deskripsi',
                 'format' => 'raw',
                 'attribute'=>'description',
                 'value'=>function ($model) {
@@ -43,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'label'=>'Action',
+                'label'=>'Aksi',
                 'format' => 'raw',
                 'value'=>function ($model) {
                     return Html::a('<i class="mdi mdi-eye"></i>',['//dtlcourse/index','id'=>$model->courseID]);

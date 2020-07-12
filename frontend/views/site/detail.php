@@ -26,26 +26,36 @@ $this->registerCss("
         font-size:1.5rem;
     }
   }
-");
-
+");               
+                    
 $connection = \Yii::$app->db;
-$sql = $connection->createCommand("SELECT COUNT(*) jml, b.dtlCatCourseName catName, b.detailID
-                                   FROM dtlcourse a 
-                                   JOIN dtlcoursecategory b ON a.detailID = b.detailID 
-                                   WHERE a.courseID = '".$model->courseID."'
-                                   GROUP BY  b.dtlCatCourseName, b.detailID");
+$sql = $connection->createCommand("SELECT  CASE WHEN `group` = 1 THEN 'Tes Formatif' 
+                                    ELSE 'Latihan' END keterangan
+                                    ,COUNT(DISTINCT x.dtlCatCourseName) jml
+                                    ,`group`
+                                    FROM dtlcoursecategory x JOIN (	  
+                                    SELECT a.*
+                                    FROM dtlcourse a 
+                                    JOIN dtlcoursecategory b ON a.detailID = b.detailID 
+                                    WHERE a.courseID = '".$model->courseID."'
+                                    ) t    
+                                    ON x.detailID = t.detailID     
+                                    GROUP BY `group`");
                               
 $mode = $sql->queryAll();  
 
 
 $practice = 0;
-$quiz = 0;
+$quiz = 0;            
 foreach($mode as $modes):
- if($modes['detailID'] ==  "2"){
-  $practice = $modes['jml'];
- }                          
- $quiz =  (isset($modes['jml']) && $modes['detailID'] == "1" ? $modes['jml'] : "0");
+ // echo $courses->courseID.'|'.$modes['group'].' - '.$modes['jml'];
+ if($modes['group'] == 1){
+   $quiz = $modes['jml'];
+ }else{
+   $practice = $modes['jml'];
+ }
 endforeach;
+
 
 ?>
 <div class="course-view">
@@ -59,8 +69,9 @@ endforeach;
     <div class="card card-block"  style="margin: 10px 10px 10px 0px;border: none">
         <span ><?= $model->description ?>  </span>
     </div>
-    <span class="ti-tag" style="font-size: 13px; font-weight: bold;float: right; margin-top: 5px; "><?= $quiz ."Tes" ?></span>
-    <span class="ti-medall" style="font-size: 13px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?=  $practice ."Latihan" ?></span>
+    <span class="ti-medall" style="font-size: 13px;font-weight: bold;float: right;margin-right: 10px;margin-top: 5px;"><?=  $practice ." Latihan" ?></span>
+    <span class="ti-tag" style="font-size: 13px; font-weight: bold;float: right; margin-top: 5px; "><?= $quiz ." Tes Formatif " ?></span>
+    
     <?= Html::a('<span class="btn btn-primary">Materi</span>',['materi','id'=>$model->courseID],['target'=>'_blank'])?>
     <?= Html::a('<span class="btn btn-success">Latihan 1</span>',['//mycourse/practice','courseID'=>$model->courseID,'userID'=>Yii::$app->user->identity->id,'type'=>2])?>
     <?= Html::a('<span class="btn btn-success">Latihan 2</span>',['//mycourse/practice','courseID'=>$model->courseID,'userID'=>Yii::$app->user->identity->id,'type'=>4])?>
