@@ -2,7 +2,7 @@
     use yii\helpers\Html;
 
     
-    $this->title = 'Role Menu';
+    $this->title = 'Menu Peranan';
     $this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
     $this->params['breadcrumbs'][] = $this->title;
 
@@ -80,13 +80,13 @@
     ");
 ?>
 
-<h1> Role Menu</h1>
+<h1> Menu Peranan</h1>
 <hr/>
 <div id="alert"></div>
 <div class="card card-block">
     <div class="form-group"  style="padding:10px">
         
-        <label>Role Name</label>
+        <label>Nama Peranan</label>
 
 
         <div class="input-group">
@@ -127,10 +127,10 @@
 						<thead>
 							<tr>
 								<th>
-									Role Name
+									Nama Peranan
 								</th>
 								<th>
-									Action
+									Aksi
 								</th>								
 							</tr>
 						</thead>

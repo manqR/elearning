@@ -65,7 +65,7 @@ class ApiController extends Controller{
             $html = '';
            
             $html .='<div id="fontSizeWrapper">
-                        <label for="fontSize">Tree Menu</label>                
+                        <label for="fontSize">Akses Menu</label>                
                     </div>
                     <ul class="tree" style="list-style: none;">';
             $x = 0;

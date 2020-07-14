@@ -27,8 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             
-            'username',
-            'name',
+            'username',            
+            [
+                'label'=>'Nama',                
+                'attribute'=>'name',
+            ],   
+            
             [
                 'label'=>"Peranan",                
                 'format' => 'raw',
@@ -41,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Status',                
                 'format' => 'raw',
                 'value'=>function ($model) {
-                    return ($model->status == 10 ? '<span class="label label-success">Enabled</span>' : '<span class="label label-danger">Disabled</span>');
+                    return ($model->status == 10 ? '<span class="label label-success">Aktif</span>' : '<span class="label label-danger">Non-Aktif</span>');
                 },
             ],      
             ['class' => 'yii\grid\ActionColumn'],

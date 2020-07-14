@@ -102,11 +102,23 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $user = User::findOne($id);
+        $model->getErrors();
+
     
         if ($model->load(Yii::$app->request->post())){
+
+                $model->name = $_POST['User']['name'];
+                $model->roleID = $_POST['User']['roleID'];
+                $model->email = $_POST['User']['email'];
+                $model->status = $_POST['User']['status'];
+
+            if($_POST['User']['password_hash'] != $model->password_hash){
+                $model->password_hash =Yii::$app->security->generatePasswordHash($_POST['User']['password_hash']);
+                $model->auth_key =Yii::$app->security->generateRandomString();                
+                $model->updated_at = substr(date('Ymdhis'), 0, 10);                     
+            }            
           
-            if ($model->save()) {
+            if ($model->save(false)) {
                 Yii::$app->session->setFlash('success', '<strong>Sukses !</strong> Pengguna Berhasil di perbaharui !');
                 return $this->redirect(['index']);
             }

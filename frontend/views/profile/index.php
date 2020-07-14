@@ -20,7 +20,7 @@ $this->title = 'Profil';
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label('Nama') ?>
     
     <?= ''//$form->field($model, 'roleID')-> dropDownList(
 		//	ArrayHelper::map(Role::find()->all(),'idrole','role_name'),

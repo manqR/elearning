@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'role_name')->textInput(['maxlength' => true])->label("Nama Peranan") ?>
     
-    <?= $form->field($model, 'status')-> dropDownList(['1'=>'Enabled',2=>'Disabled'],
+    <?= $form->field($model, 'status')-> dropDownList(['1'=>'Aktif',2=>'Non-Aktif'],
 			['prompt'=>'- Pilih -','style' => 'width: 100%;height:40px'])  ?>		
 
 
